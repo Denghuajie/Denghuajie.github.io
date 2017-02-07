@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>富士山下</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2017-02-07T16:22:48.000Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>胖码农要逆袭</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>解决hexo的“DTraceProviderBindings &#39;MODULE_NOT_FOUND&#39;“问题</title>
+    <link href="http://yoursite.com/2017/02/08/%E8%A7%A3%E5%86%B3hexo%E7%9A%84%E2%80%9CDTraceProviderBindings%20&#39;MODULE_NOT_FOUND&#39;%E2%80%9C%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2017/02/08/解决hexo的“DTraceProviderBindings &#39;MODULE_NOT_FOUND&#39;“问题/</id>
+    <published>2017-02-07T16:16:06.000Z</published>
+    <updated>2017-02-07T16:22:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在网上搜索了下，有不少人都碰到这个问题</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/Snip20170208_15.png" alt=""></p>
+<p>很多小伙伴只要执行这一句代码就解决了~：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo --no-optional</div></pre></td></tr></table></figure>
+<p>然而我这里执行完好几次也没有作用。。。</p>
+<p>最后的解决方式：</p>
+<p>执行以下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ rm -rf node_modules/ &amp;&amp; npm install</div><div class="line">$ sudo npm install hexo --no-optional</div></pre></td></tr></table></figure>
+<p>警告终于消除了</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在网上搜索了下，有不少人都碰到这个问题&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://o8qo56tin.bkt.clouddn.com/Snip20170208_15.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;很多小伙伴只要执行这一句代码就解决了~：&lt;/p&gt;
+&lt;figur
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>写一个简单的post请求</title>
+    <link href="http://yoursite.com/2016/08/24/page-9/"/>
+    <id>http://yoursite.com/2016/08/24/page-9/</id>
+    <published>2016-08-24T13:34:33.000Z</published>
+    <updated>2016-08-24T13:49:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近捣鼓前端，用ajax+一个粗糙的页面模仿了下登录的页面~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;title&gt;登录&lt;/title&gt;</div><div class="line">    &lt;style type=&quot;text/css&quot;&gt;</div><div class="line">    .container&#123;width:100%; height: 300px; margin: 0 auto; position: relative;&#125;</div><div class="line">    .container h1&#123;text-align: center;&#125;</div><div class="line">    .account&#123;width: 300px; height: 50px; margin-top: 20px; margin-left: auto; margin-right: auto;&#125;</div><div class="line">    .account .myname&#123;margin-left: 16px&#125;</div><div class="line">    .pwd&#123;width: 300px; height: 30px; margin-left: auto; margin-right: auto;&#125;</div><div class="line">    .pwd .password&#123;margin-left: 16px;&#125;</div><div class="line">    .container .loginbtn&#123;display: block; margin-top:20px; margin-bottom: 20px; width:100px; height: 30px; margin-left: auto; margin-right: auto;&#125;</div><div class="line">    .result &#123;line-height: 50px; text-align:center; width: 300px; height: 50px; margin:0 auto; background: #33f;&#125;</div><div class="line">    &lt;/style&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;div class=&quot;container&quot;&gt;</div><div class="line">    &lt;h1&gt;登录页面&lt;/h1&gt;</div><div class="line">    &lt;div class=&quot;account&quot;&gt;请输入账号:&lt;input type=&quot;text&quot; name=&quot;username&quot; class=&quot;myname&quot; /&gt;&lt;/div&gt;</div><div class="line">&lt;br /&gt;</div><div class="line">&lt;div class=&quot;pwd&quot;&gt;请输入密码:&lt;input type=&quot;password&quot; name=&quot;password&quot; class=&quot;password&quot; /&gt;&lt;/div&gt;</div><div class="line">&lt;br /&gt;</div><div class="line">&lt;button class=&quot;loginbtn&quot; type=&quot;button&quot;&gt;登录&lt;/button&gt;</div><div class="line">&lt;div class=&quot;result&quot;&gt;输出结果&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;http://libs.baidu.com/jquery/2.0.0/jquery.min.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    $(&apos;.loginbtn&apos;).click(function() &#123;</div><div class="line">        var username = $(&apos;.myname&apos;).val();</div><div class="line">        var password = $(&apos;.password&apos;).val();</div><div class="line"></div><div class="line">        var url = &apos;/client/login&apos;;</div><div class="line"></div><div class="line">        $.ajax(&#123;</div><div class="line">            url: url,</div><div class="line">            type: &apos;POST&apos;,</div><div class="line">            dataType: &apos;json&apos;,</div><div class="line">            data: &#123;mobile: username,</div><div class="line">                   password: password&#125;,</div><div class="line">        &#125;)</div><div class="line">        .done(function(data) &#123;</div><div class="line">            if (data.code === 0) &#123;</div><div class="line">              $(&apos;.result&apos;).html(&apos;POST返回的结果&apos; + data.result.sessionId).css(&apos;background&apos;,&apos;red&apos;);</div><div class="line">            &#125;</div><div class="line">            else</div><div class="line">            &#123;</div><div class="line">               alert(data.err_msg);</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">        .fail(function(result) &#123;</div><div class="line">            alert(result.err_msg);</div><div class="line">            console.log(&quot;error&quot;);</div><div class="line">        &#125;)</div><div class="line">        .always(function() &#123;</div><div class="line">            console.log(&quot;complete&quot;);</div><div class="line">        &#125;);</div><div class="line"></div><div class="line"></div><div class="line">        // $.post(url, &#123;mobile: username, password:password&#125;, function(data, textStatus, xhr) &#123;</div><div class="line">        //     $(&apos;.result&apos;).html(&apos;post返回的结果&apos; + data.result.client.birthday).css(&apos;background&apos;,&apos;red&apos;);</div><div class="line">        //     console.log(data);</div><div class="line">        // &#125;);</div><div class="line">    &#125;);</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/E5965DC3-4D24-4A2D-8C8A-C6EF0CA2B0F1.png" alt=""></p>
+<p>Done~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近捣鼓前端，用ajax+一个粗糙的页面模仿了下登录的页面~&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>iOS中设置状态栏样式</title>
+    <link href="http://yoursite.com/2016/08/24/page-8/"/>
+    <id>http://yoursite.com/2016/08/24/page-8/</id>
+    <published>2016-08-24T12:59:12.000Z</published>
+    <updated>2016-08-24T13:26:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>iOS中默认状态栏样式为UIStatusBarStyleDefault，也就是黑色：</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/5A9CDE39-7EDF-4F9E-A79E-871E1CBD3EE4.png" alt=""></p>
+<p>如果要更改全局样式，以下两种方法是等价的：</p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//在程序入口代码设置</div><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line">  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>并且在plist中增加一个属性，设置为NO：</strong></p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/4944671C-6D82-4D1D-A106-E193E7C173F5.png" alt=""></p>
+</li>
+</ul>
+<p><strong>如果缺少这个属性，代码设置的样式是不会生效的</strong></p>
+<ul>
+<li><p>或者直接plist中添加两个属性，就不需要代码设置了：</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/9BC3FC6F-B9E4-412D-896A-37F5B1EB5DA3.png" alt=""></p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/196B253C-2E4C-42E8-8D2B-891B4D368993.png" alt=""></p>
+</li>
+</ul>
+<p>可以看到样式生效了。</p>
+<p>如果说某个页面需要这个样式，而另外的页面需要另外一个样式呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">分别在viewWillAppear与viewWillDisAppear中更改样式与还原样式即可，缺点就是侧滑的时候会闪一下，不太美观，个人感觉最好在样式变化的页面禁用手势。</div></pre></td></tr></table></figure>
+<p>至于说<code>- (UIStatusBarStyle)preferredStatusBarStyle</code>这个API来设置的话，如果当前VC被其他VC（如导航控制器）包住的话，设置样式会有问题，需要重写所有外层VC的<code>- (UIViewController *)childViewControllerForStatusBarStyle</code>，而且plist文件中的View controller-based status bar appearance设置为YES才能生效，太麻烦了。</p>
+<p>以上是对设置状态栏样式的个人理解，说错了请指正。</p>
+<p>PS：提一下appearance这个省事的API，一次性设置全局外观，挺省事的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//设置导航栏背景颜色</div><div class="line">[[UINavigationBar appearance] setBackgroundImage:[[UIColor blackColor] color2Image] forBarMetrics:UIBarMetricsDefault];</div><div class="line"></div><div class="line">//设置导航栏字体颜色</div><div class="line">[[UINavigationBar appearance] setTitleTextAttributes: @&#123;NSForegroundColorAttributeName:[UIColor whiteColor]&#125;];</div><div class="line"></div><div class="line">//设置tabBarItem选中时的字体颜色</div><div class="line">[[UITabBarItem appearance]  setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName,nil] forState:UIControlStateSelected];</div><div class="line"></div><div class="line">//tabBarItem普通状态字体颜色</div><div class="line">[[UITabBarItem appearance]  setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:0.490 alpha:1.000], NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];</div><div class="line"></div><div class="line">//tabBar背景颜色</div><div class="line">[[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;iOS中默认状态栏样式为UIStatusBarStyleDefault，也就是黑色：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://o8qo56tin.bkt.clouddn.com/5A9CDE39-7EDF-4F9E-A79E-871E1CBD3EE4.png&quot; al
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>使用KVC修改UIAlertController的样式</title>
+    <link href="http://yoursite.com/2016/07/28/page-7/"/>
+    <id>http://yoursite.com/2016/07/28/page-7/</id>
+    <published>2016-07-28T14:46:39.000Z</published>
+    <updated>2016-07-28T14:58:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近有个需求如图:</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/6F180CC0C66B7F02393196EAC48AAB92.jpg" alt=""></p>
+<p>看来是要自己自定义一个View的节奏，后来去网上搜了下资料，捣鼓了下UIAlertController，还真的实现了这种效果，标题、textField、按钮的文字大小与颜色都可以自己修改，原理就是利用KVC：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSDictionary * attributes = @&#123;NSFontAttributeName : subTitleFont, NSParagraphStyleAttributeName : paragraphStyle, NSForegroundColorAttributeName: subTitleColor&#125;;</div><div class="line"></div><div class="line">NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:subTitle];</div><div class="line"></div><div class="line">[attributedTitle addAttributes:attributes range:NSMakeRange(0, subTitle.length)];</div><div class="line">    </div><div class="line">[alertVC setValue:attributedTitle forKey:@&quot;attributedMessage&quot;];</div></pre></td></tr></table></figure>
+<p>类似这种富文本赋值，用runtime打印下UIAlertController类就不难理解：</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/E0104DB6-E645-49A8-83B7-DD361FB3E1F7.png" alt=""></p>
+<p>所以用KVC将富文本赋值过去就行。</p>
+<p>后来看看UIAlertView能不能用类似的原理去实现同样的效果，发现是不行的：</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/1B21DDB2-7391-4F54-A8BE-789C0D93CCCD.png" alt=""></p>
+<p>UIAlertView的成员变量不支持富文本属性，over~</p>
+<p>-EOF-</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近有个需求如图:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://o8qo56tin.bkt.clouddn.com/6F180CC0C66B7F02393196EAC48AAB92.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;看来是要自己自定义一个View的节奏，后来去网上
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>踩坑</title>
+    <link href="http://yoursite.com/2016/07/07/page-6/"/>
+    <id>http://yoursite.com/2016/07/07/page-6/</id>
+    <published>2016-07-07T05:46:44.000Z</published>
+    <updated>2016-07-07T06:00:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="谈下自己跳的一个坑"><a href="#谈下自己跳的一个坑" class="headerlink" title="谈下自己跳的一个坑"></a>谈下自己跳的一个坑</h2><p>最近项目中有个界面是这样的：</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/8F6ABE54-58FB-467F-A5E4-048E54BD312C.png" alt=""></p>
+<p>举个例子：在G开头的索引城市中，选中了广州，那么回滚到顶部，定位与热门的广州都要显示被选中。</p>
+<p>一开始想当然的做法是根据城市名去前两个section找到collectionView对应哪一个row要显示，改变collectionViewCell的状态。然而根据已知的城市名拿到section与row后，却发现设置的状态没有生效，因为用<code>cellForItemAtIndexPath</code>拿到的tableViewCell本身就是个nil，后面的设置都是没有作用的。</p>
+<p><strong>坑就坑在：用<code>cellForItemAtIndexPath</code>拿到的只能是当前屏幕显示的cell，拿不到离屏的cell，离屏的cell早就被重用了，以为是第2个，可能飞到第10个去。</strong></p>
+<p>正确的做法应该是：用一个空数组记录选中的城市，将这个数组传给tableView与collectionView，根据数组中是否有元素来设置样式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath&#123;</div><div class="line">    </div><div class="line">        SomeCell *commonCell = [tableView dequeueReusableCellWithIdentifier:[SomeCell reuseIdentifier] forIndexPath:indexPath];</div><div class="line">        NSArray *array = self.finalData[indexPath.section];</div><div class="line">        </div><div class="line">        NSDictionary *dict = array[indexPath.row];</div><div class="line">        </div><div class="line">        commonCell.textLabel.text = dict[@&quot;name&quot;];</div><div class="line">        commonCell.colorFlag = [self.selData containsObject:commonCell.textLabel.text] ? -1 : 1;</div><div class="line">        commonCell.textLabel.textColor = commonCell.colorFlag==-1? HexRGB(0xf1c100) : [UIColor blackColor];</div><div class="line">        </div><div class="line">        return commonCell;   </div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;谈下自己跳的一个坑&quot;&gt;&lt;a href=&quot;#谈下自己跳的一个坑&quot; class=&quot;headerlink&quot; title=&quot;谈下自己跳的一个坑&quot;&gt;&lt;/a&gt;谈下自己跳的一个坑&lt;/h2&gt;&lt;p&gt;最近项目中有个界面是这样的：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://o8q
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>尽量用枚举器、迭代器，少用for循环</title>
+    <link href="http://yoursite.com/2016/06/29/page-5/"/>
+    <id>http://yoursite.com/2016/06/29/page-5/</id>
+    <published>2016-06-29T15:28:01.000Z</published>
+    <updated>2016-06-29T16:38:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="通常我们遍历数组看起来像是这样（使用for循环）："><a href="#通常我们遍历数组看起来像是这样（使用for循环）：" class="headerlink" title="通常我们遍历数组看起来像是这样（使用for循环）："></a>通常我们遍历数组看起来像是这样（使用for循环）：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSArray *anArray = /*...*/;</div><div class="line">for(int i = 0; i &lt; anArray.count; i++)</div><div class="line">&#123;</div><div class="line">   id object = anArray[i];</div><div class="line">   //对这个object做点什么...</div><div class="line">   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果换成遍历字典或者set，那么复杂点：</p>
+<ul>
+<li>字典</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">NSDictionary *aDictionary = /*...*/;</div><div class="line">NSArray *allKeys = [aDictionary allKeys];</div><div class="line">for(int i = 0; i &lt; allKeys.count; i++)</div><div class="line">&#123;</div><div class="line">   id key = allKeys[i];</div><div class="line">   id value = aDictionary[key];</div><div class="line">   //对这个`key`或`value`做点什么...</div><div class="line">   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Set</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSSet *aSet = /*...*/;</div><div class="line">NSArray *allObjects = [aSet allObjects];</div><div class="line">for(int i = 0; i &lt; allObjects.count; i++)</div><div class="line">&#123;</div><div class="line">   id object = allObjects[i];</div><div class="line">   //对这个object做点什么...</div><div class="line">   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由于字典与Set都是无序的，不能直接用特定的下标去集合里取值，所有要先获取字典的所有key与Set的所有object，在获得的有序数组上遍历，以访问集合里的值。创建这个附加数组会有额外的开销，同时多创建了一个数组对象。</p>
+<h3 id="利用Objective-C的枚举器来遍历可以避免创建这种中介数组："><a href="#利用Objective-C的枚举器来遍历可以避免创建这种中介数组：" class="headerlink" title="利用Objective-C的枚举器来遍历可以避免创建这种中介数组："></a>利用Objective-C的枚举器来遍历可以避免创建这种中介数组：</h3><h4 id="NSEnumerator"><a href="#NSEnumerator" class="headerlink" title="NSEnumerator"></a>NSEnumerator</h4><ul>
+<li><p>遍历数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSArray *anArray = /*...*/;</div><div class="line">NSEnumerator *enumerator = [anArray objectEnumerator];</div><div class="line">id object;</div><div class="line">while ((object = [enumerator nextObject]) != nil)</div><div class="line">&#123;</div><div class="line">   //对这个object做点什么...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>遍历字典</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSDictionary *aDictionary = /*...*/;  </div><div class="line">NSEnumerator *enumerator = [aDictionary keyEnumerator];</div><div class="line">id key;</div><div class="line">while ((key = [enumerator nextObject]) != nil)</div><div class="line">&#123;</div><div class="line">   id value = aDictionary[key];</div><div class="line">   //对这个`key`或`value`做点什么...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>遍历Set</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSSet *aSet = /*...*/;</div><div class="line">NSEnumerator *enumerator = [aSet objectEnumerator];</div><div class="line">id object;</div><div class="line">while ((object = [enumerator nextObject]) != nil)</div><div class="line">&#123;</div><div class="line">   //对这个object做点什么...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>可以看到无论是遍历哪种集合，语法都是类似的。</p>
+<h4 id="快速遍历"><a href="#快速遍历" class="headerlink" title="快速遍历"></a>快速遍历</h4><p>快速遍历与上文的NSEnumerator来遍历差不多，语法上更简洁。</p>
+<ul>
+<li><p>遍历数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSArray *anArray = /*...*/;</div><div class="line">for(id object in anArray)</div><div class="line">&#123;</div><div class="line">   //对这个object做点什么...</div><div class="line">   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>遍历字典</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSDictionary *aDictionary = /*...*/;  </div><div class="line">for(id key in aDictionary)</div><div class="line">&#123;</div><div class="line">   id value = aDictionary[key];</div><div class="line">   //对这个`key`或`value`做点什么...  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>然而这个方法最大的缺点在于无法获取当前遍历操作所针对的下标，这是实际开发中经常需要获取的值。</strong></p>
+<h4 id="基于block的枚举器"><a href="#基于block的枚举器" class="headerlink" title="基于block的枚举器"></a>基于block的枚举器</h4><p>基于块来实现遍历的API：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (void)enumerateObjectsUsingBlock:(void (^)(ObjectType obj, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);</div></pre></td></tr></table></figure>
+<p>这个块有三个参数，分别是当前迭代针对的对象、所针对的下标、以及指向布尔值的指针。通过第三个参数可以终止遍历操作。</p>
+<p>例如遍历数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">  NSArray *anArray = /*...*/;</div><div class="line">[anArray enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL * _Nonnull stop) &#123;</div><div class="line">    //对这个object做点什么...</div><div class="line">    if(shouldStop)</div><div class="line">    &#123;</div><div class="line">       *stop = YES;</div><div class="line">    &#125;</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<p>遍历字典会稍有不同：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSDictionary *aDictionary = /*...*/; </div><div class="line">  [aDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) &#123;</div><div class="line">      //对这个`key`或`value`做点什么... </div><div class="line">      if(shouldStop)</div><div class="line">      &#123;</div><div class="line">         *stop = YES;</div><div class="line">      &#125;</div><div class="line">  &#125;];</div></pre></td></tr></table></figure>
+<p>这种方式的好处是：</p>
+<ul>
+<li>遍历时直接从block获取更多信息，如当前所针对的下标。</li>
+</ul>
+<ul>
+<li><p>遍历字典时无需额外编码，同时获取key与value，省去了根据key去查找value的这一步，这就有性能上的优势，因为字典的数据结构本来就是key与value一起存储的。</p>
+</li>
+<li><p>能够避免类型转换，通过修改block参数，直接指定遍历的对象类型，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//字典中的对象全是NSString</div><div class="line">NSDictionary *aDictionary = /*...*/; </div><div class="line">  [aDictionary enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL * _Nonnull stop) &#123;</div><div class="line">      //对这个`key`或`value`做点什么... </div><div class="line">      if(shouldStop)</div><div class="line">      &#123;</div><div class="line">         *stop = YES;</div><div class="line">      &#125;</div><div class="line">  &#125;];</div></pre></td></tr></table></figure>
+<p>一般是提前知道了集合里的对象类型，就可以在block参数中直接指定。</p>
+</li>
+</ul>
+<h4 id="再举个项目的例子"><a href="#再举个项目的例子" class="headerlink" title="再举个项目的例子"></a>再举个项目的例子</h4><p>如果要在一个模型数组中根据一个id去查找对应的模型，并且用这个模型重新赋值给某个cell持有的模型(改变某个属性)，最后刷新数据，那么用for循环是这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">SomeModel *cellModel = self.dataList[indexPath.section];</div><div class="line">for(int i = 0; i &lt; self.dataList.count; i++)</div><div class="line">&#123;</div><div class="line">  SomeModel *model = self.dataList[i];</div><div class="line">  if([model.someId isEqualToString:cellModel.someId])</div><div class="line">  &#123;</div><div class="line">     cellModel.someValue = model.someValue;</div><div class="line">     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:i] withRowAnimation:UITableViewRowAnimationNone];</div><div class="line">     break;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果使用枚举器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">SomeModel *cellModel = self.dataList[indexPath.section];</div><div class="line">NSUInteger index = [self.dataList indexOfObjectPassingTest:^BOOL(SomeModel *model, NSUInteger idx, BOOL * _Nonnull stop) &#123;</div><div class="line">                   cellModel.someValue = [model.someId isEqualToString:cellModel.someId] ? model.someValue : cellModel.someValue;</div><div class="line">                    return [model.someId isEqualToString:cellModel.someId];</div><div class="line">                &#125;];</div><div class="line">                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationNone];</div></pre></td></tr></table></figure>
+<p>最后，老是用for循环不觉得太low了吗，使用迭代器枚举器瞬间提高逼格了有木有，哈哈~~~</p>
+<p>-EOF-</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;通常我们遍历数组看起来像是这样（使用for循环）：&quot;&gt;&lt;a href=&quot;#通常我们遍历数组看起来像是这样（使用for循环）：&quot; class=&quot;headerlink&quot; title=&quot;通常我们遍历数组看起来像是这样（使用for循环）：&quot;&gt;&lt;/a&gt;通常我们遍历数组看起来
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>升级CoCoaPods之后的格式变动问题</title>
+    <link href="http://yoursite.com/2016/06/28/page-4/"/>
+    <id>http://yoursite.com/2016/06/28/page-4/</id>
+    <published>2016-06-28T05:58:22.000Z</published>
+    <updated>2016-06-28T06:04:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前多个target的Podfile文件是用link_with target1, target2…表示添加多个target</p>
+<p>在升级pod到1.0.0之后发现还这么写就报错：</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/pod.png" alt=""></p>
+<p>查了下，现在改成用target ‘myTarget’ do了，所以正确的姿势应该是：</p>
+<p>source ‘<a href="https://github.com/CocoaPods/Specs.git" target="_blank" rel="external">https://github.com/CocoaPods/Specs.git</a>‘</p>
+<p>platform :ios, ‘7.0’</p>
+<p>def myPods<br>  pod ‘MBProgressHUD’, ‘~&gt; 0.9.2’<br>  pod ‘AFNetworking’<br>  pod ‘ReactiveCocoa’, ‘2.5’</p>
+<p>end</p>
+<p>target ‘Rac’ do<br>    myPods<br>end</p>
+<p>target ‘Rac_dev’ do<br>    myPods<br>end</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前多个target的Podfile文件是用link_with target1, target2…表示添加多个target&lt;/p&gt;
+&lt;p&gt;在升级pod到1.0.0之后发现还这么写就报错：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://o8qo56tin.bkt.cloud
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>一款好用的视频转gif工具</title>
+    <link href="http://yoursite.com/2016/06/21/page-3/"/>
+    <id>http://yoursite.com/2016/06/21/page-3/</id>
+    <published>2016-06-21T02:46:58.000Z</published>
+    <updated>2016-06-21T02:54:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用系统自带的QuickTime进行屏幕录制后，利用<a href="https://github.com/vvo/gifify" target="_blank" rel="external">gifify</a>这个插件把视频转换成gif动画。</p>
+<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -o /usr/local/bin/gifify -O https://raw.githubusercontent.com/jclem/gifify/master/gifify.sh &amp;&amp; \  chmod +x /usr/local/bin/gifify</div></pre></td></tr></table></figure>
+<p>如果写入失败，可以在curl前面加个sudo</p>
+<h3 id="安装其他依赖库"><a href="#安装其他依赖库" class="headerlink" title="安装其他依赖库"></a>安装其他依赖库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install ffmpeg</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install imagemagick</div></pre></td></tr></table></figure>
+<p>最后使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gifify demo.mov -o demo.gif --from 0 --to 12 resize -300:-1</div></pre></td></tr></table></figure>
+<p>转换视频，详细的参数说明请看<a href="https://github.com/vvo/gifify" target="_blank" rel="external">这里</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用系统自带的QuickTime进行屏幕录制后，利用&lt;a href=&quot;https://github.com/vvo/gifify&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;gifify&lt;/a&gt;这个插件把视频转换成gif动画。&lt;/p&gt;
+&lt;h3 id=&quot;安
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>纯吐槽</title>
+    <link href="http://yoursite.com/2016/06/17/page-2/"/>
+    <id>http://yoursite.com/2016/06/17/page-2/</id>
+    <published>2016-06-17T11:57:24.000Z</published>
+    <updated>2016-06-17T12:18:58.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>最近友盟分享碰到个很奇怪的问题，其他分享平台与QQ分享设置的内容相同，然而QQ分享一点就崩，其他平台怎么点都没事，然后如果先点其他平台的分享再点QQ分享也正常。这个问题暂时没找到问题所在，发邮件给友盟客服了，希望能找到解决方法。</li>
+</ul>
+<ul>
+<li><p>UITableView碰到一个didSelectRow方法不执行的问题，谷歌了下，发现把selection改成single selection即可</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/95C5F9B0-E906-4AE6-B583-0A4E47979B48.png" alt=""></p>
+</li>
+</ul>
+<ul>
+<li>不经意间看到了安卓的代码注释里某一行：//iOS奇葩(后面内容未知) ……</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;最近友盟分享碰到个很奇怪的问题，其他分享平台与QQ分享设置的内容相同，然而QQ分享一点就崩，其他平台怎么点都没事，然后如果先点其他平台的分享再点QQ分享也正常。这个问题暂时没找到问题所在，发邮件给友盟客服了，希望能找到解决方法。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>在cell里显示未知尺寸的网络图片</title>
+    <link href="http://yoursite.com/2016/06/14/page-1/"/>
+    <id>http://yoursite.com/2016/06/14/page-1/</id>
+    <published>2016-06-14T11:26:03.000Z</published>
+    <updated>2016-06-14T13:36:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="网络图片在没返回之前是不知道图片尺寸大小的，在cell里展示又需要得知图片宽高，怎么做呢？"><a href="#网络图片在没返回之前是不知道图片尺寸大小的，在cell里展示又需要得知图片宽高，怎么做呢？" class="headerlink" title="网络图片在没返回之前是不知道图片尺寸大小的，在cell里展示又需要得知图片宽高，怎么做呢？"></a>网络图片在没返回之前是不知道图片尺寸大小的，在cell里展示又需要得知图片宽高，怎么做呢？</h3><p>利用SDWebImage缓存图片的原理设置约束即可：</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">- (void)configCell:(PublishLogViewCell*)cell data:(LogModel*)log indexPath:(NSIndexPath *)indexPath</div><div class="line"></div><div class="line">&#123;</div><div class="line"></div><div class="line">    __weakPublishLogViewCell *wcell = cell;</div><div class="line"></div><div class="line">    WEAKSELF</div><div class="line"></div><div class="line">    [cell.avatarBtn sd_setImageWithURL:[Util getImageCircleUrl:log.head_image width:kScreenWidth] forState:UIControlStateNormal placeholderImage:Aql_USER_PLACEHORDER];</div><div class="line"></div><div class="line">    NSString *logPath = [Util getUrlStringFromDataString:log.content];</div><div class="line"></div><div class="line">    SDImageCache *imageCache = [SDImageCache sharedImageCache];</div><div class="line"></div><div class="line">    UIImage *mainImage = [imageCache imageFromMemoryCacheForKey:logPath];</div><div class="line"></div><div class="line">    mainImage = mainImage ? mainImage : [imageCache imageFromDiskCacheForKey:logPath];</div><div class="line"></div><div class="line">    if(mainImage)</div><div class="line"></div><div class="line">    &#123;</div><div class="line"></div><div class="line">        wcell.iconView.image = mainImage;</div><div class="line"></div><div class="line">        wcell.iconViewHeightCout.constant = kScreenWidth * mainImage.size.height / mainImage.size.width;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    else</div><div class="line"></div><div class="line">    &#123;</div><div class="line"></div><div class="line">        cell.iconViewHeightCout.constant = 200;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    [cell.iconView setImageWithURL:[Util getFormatUrl:[Util getUrlStringFromDataString:log.content]] placeholderImage:Aql_PLACEHOLDER_IMAGE completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) &#123;</div><div class="line"></div><div class="line">        if (image) &#123;</div><div class="line"></div><div class="line">            dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line"></div><div class="line">                wcell.iconViewHeightCout.constant = kScreenWidth * image.size.height / image.size.width;</div><div class="line"></div><div class="line">                [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];</div><div class="line"></div><div class="line">            &#125;);</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        &#125; usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];</div><div class="line"></div><div class="line">    &#125;    </div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;网络图片在没返回之前是不知道图片尺寸大小的，在cell里展示又需要得知图片宽高，怎么做呢？&quot;&gt;&lt;a href=&quot;#网络图片在没返回之前是不知道图片尺寸大小的，在cell里展示又需要得知图片宽高，怎么做呢？&quot; class=&quot;headerlink&quot; title=&quot;网络图片在没返回之前是不知道图片尺寸大小的，在cell里展示又需要得知图片宽高，怎么做呢？&quot;&gt;&lt;/a&gt;网络图片在没返回之前是不知道图片尺寸大小的，在cell里展示又需要得知图片宽高，怎么做呢？&lt;/h3&gt;&lt;p&gt;利用SDWebImage缓存图片的原理设置约束即可：&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iOS编辑日志功能</title>
+    <link href="http://yoursite.com/2016/06/14/page/"/>
+    <id>http://yoursite.com/2016/06/14/page/</id>
+    <published>2016-06-14T07:36:49.000Z</published>
+    <updated>2016-06-14T13:34:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="iOS-RichTextEditor"><a href="#iOS-RichTextEditor" class="headerlink" title="iOS-RichTextEditor"></a>iOS-RichTextEditor</h1><p>最近项目中有个需求是这样的：用户编辑日志，包含文字和图片，并可保存草稿或编辑，效果类似下图所示</p>
+<p>这是豆瓣的写日记功能，可以看到文字与图片是一起排版的，同时默认插入图片的时候是往下换行。<br><img src="http://o8qo56tin.bkt.clouddn.com/douban.png" alt="">  </p>
+<p>研究这个需求的时候，最后想到的实现思路无非是两种：</p>
+<ul>
+<li><p>用html编辑，这个只需要将前端同事的页面跟js文件嵌入，同时做React与Native端的交互，上传相片的时候OC将图片url参数传给js。</p>
+</li>
+<li><p>iOS7之后苹果推出了TextKit，使用该框架将textView里的图片文字经过转义得到一个字符串，并传给后台。从服务器获取数据时在进行解析得到NSAttributedString交给textView，这个过程分上传与解析。</p>
+</li>
+</ul>
+<p>（在这里猜测豆瓣应该是用的第一种方式）</p>
+<p>当时前端同事还没开始做这块，自己先用第2种方案实现，过程如下。</p>
+<ul>
+<li><p>如果是文字，直接输入即可。</p>
+</li>
+<li><p>如果是图片，选择完图片的回调API里，将图片上传到服务器，拿到图片的url，然后再将图片插入textView。<strong>那么这里就有一个关键问题，在上传给服务器的字符串里，如何用相应的字符串表示图片？</strong></p>
+</li>
+</ul>
+<a id="more"></a>
+<p>个人思路如下：</p>
+<h2 id="上传阶段"><a href="#上传阶段" class="headerlink" title="上传阶段"></a>上传阶段</h2><p>创建一个类KLTextAttachment继承NSTextAttachment，该类用来持有富文本对应的UIImage，并且在转义的时候利用该类生成一个表示图片的img标签，在最后选择发布的时候，遍历textView的attributedText，只要是图片，转义为该标签，部分代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">- (NSString *)getPlainString &#123;</div><div class="line">    NSMutableString *plainString = [NSMutableString stringWithString:self.string];</div><div class="line">    __block NSUInteger base = 0;</div><div class="line"></div><div class="line">    [self enumerateAttribute:NSAttachmentAttributeName</div><div class="line">                     inRange:NSMakeRange(0, self.length)</div><div class="line">                     options:0</div><div class="line">                  usingBlock:^(id value, NSRange range, BOOL *stop) &#123;</div><div class="line">                      if (value &amp;&amp; [value isKindOfClass:[KLTextAttachment class]]) &#123;</div><div class="line"></div><div class="line">                          KLTextAttachment *attachment = (KLTextAttachment *)value;</div><div class="line">                          NSString *imgName = [attachment getHtmlFormatFileName];</div><div class="line">                          [plainString replaceCharactersInRange:NSMakeRange(range.location + base,range.length)</div><div class="line">                           withString:imgName];</div><div class="line">                          base += imgName.length - 1;</div><div class="line">                      &#125;</div><div class="line">                  &#125;];</div><div class="line"></div><div class="line">    return plainString;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么最后传给后台的字符串就是文字与图片拼接起来的字符串。</p>
+<h2 id="解析阶段"><a href="#解析阶段" class="headerlink" title="解析阶段"></a>解析阶段</h2><p>从后台获得的字符串类似@”这是一段文字&lt;<ios-img src="" 图片url""="">&gt;”</ios-img></p>
+<p>(多加了&lt;与ios-img是为了后面方便解析)</p>
+<p>解析过程如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">+ (NSAttributedString *)getRichTextFromIosString:(NSString *)dataString</div><div class="line">&#123;</div><div class="line">    NSArray *str = [dataString componentsSeparatedByString:@&quot;#separate#&quot;];</div><div class="line"></div><div class="line">    NSMutableAttributedString *richText = [[NSMutableAttributedString alloc] init];</div><div class="line"></div><div class="line">    for (int i = 0 ; i&lt; str.count; i++) &#123;</div><div class="line">        NSString *cString = str[i];</div><div class="line">        //图片url</div><div class="line">        if (cString.length &gt; 0) &#123;</div><div class="line">            if ([cString containsString:@&quot;http&quot;]) &#123;</div><div class="line"></div><div class="line">                //得到一个html</div><div class="line">                cString = [cString stringByReplacingOccurrencesOfString:@&quot;&lt;@ios-&quot; withString:@&quot;&lt;&quot;];</div><div class="line">                cString = [cString stringByReplacingOccurrencesOfString:@&quot;&apos;&quot; withString:@&quot;&quot;];</div><div class="line">                NSDictionary *options = @&#123;NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType&#125;;</div><div class="line">                NSAttributedString *string = [[NSAttributedString alloc] initWithData:[cString dataUsingEncoding:NSUnicodeStringEncoding] options:options documentAttributes:nil error:nil];</div><div class="line">                [richText appendAttributedString:string];</div><div class="line">            &#125;</div><div class="line">            //文字</div><div class="line">            else</div><div class="line">            &#123;</div><div class="line">                NSAttributedString * aString = [[NSAttributedString alloc] initWithString:cString attributes:@&#123;NSFontAttributeName: [UIFont systemFontOfSize:17]&#125;];</div><div class="line"></div><div class="line">                [richText appendAttributedString:aString];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return richText;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>先得到一个装有字符串的数组，把文字和图片分开，然后创建一个NSMutableAttributedString对象用来接收最后解析完的富文本。</p>
+<p>遍历该数组，如果是文字，直接转成NSAttributedString对象并用NSMutableAttributedString对象去拼接；如果是图片，将字符串转义为html标签，在用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSDictionary *options = @&#123;NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType&#125;;</div><div class="line">NSAttributedString *string = [[NSAttributedStringalloc] initWithData:[cString dataUsingEncoding:NSUnicodeStringEncoding] options:options documentAttributes:nilerror:nil];</div></pre></td></tr></table></figure>
+<p>转为NSAttributedString对象并拼接。</p>
+<p>最后得到的NSMutableAttributedString赋值给textView即可。</p>
+<p>看上去好像没什么问题，但是实际上发现如果是编辑草稿（保存在服务器），那么继续编辑的时候会碰到无法正确继续转义的问题，同时利用@{NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType}去生成代表图片的富文本是不对的，如果图片一多，必然加载会慢，textView只应该负责图片的排版渲染而不是下载。</p>
+<h2 id="下面是新的解析方式"><a href="#下面是新的解析方式" class="headerlink" title="下面是新的解析方式"></a>下面是新的解析方式</h2><p>拿到图片的url之后，利用url生成图片，并根据图片生成一个KLTextAttachment对象，最后利用该对象生成一个NSAttributedString：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">SDImageCache *imageCache = [SDImageCache sharedImageCache];</div><div class="line">                UIImage *image = [imageCache imageFromMemoryCacheForKey:[NSString stringWithFormat:@&quot;%@-draft&quot;, newString]];</div><div class="line">                image = image ? image : [imageCache imageFromDiskCacheForKey:[NSString stringWithFormat:@&quot;%@-draft&quot;, newString]];</div><div class="line">                if(!image)</div><div class="line">                &#123;</div><div class="line">                    NSData * data = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:newString]];</div><div class="line">                    UIImage *image = [[UIImage alloc]initWithData:data];</div><div class="line">                    //缓存图片</div><div class="line">                    [[SDImageCache sharedImageCache] storeImage:image forKey:[NSString stringWithFormat:@&quot;%@-draft&quot;, newString] toDisk:YES];</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                if (image) &#123;</div><div class="line">                        KLTextAttachment *klattchment = [self getImageAttachment:image url:newString];</div><div class="line">                        if (klattchment) &#123;</div><div class="line">                            NSAttributedString *attr = [NSAttributedString attributedStringWithAttachment:klattchment];</div><div class="line">                            [result addObject:attr];</div><div class="line">                        &#125;</div><div class="line"></div><div class="line">                    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSAttributedString *attr = [NSAttributedString attributedStringWithAttachment:klattchment];</div></pre></td></tr></table></figure>
+<p>这样一来就解决上述所说的问题。</p>
+<p>个人思路就是这些，如果有错误，欢迎指正。</p>
+<h2 id="其他的一些小问题"><a href="#其他的一些小问题" class="headerlink" title="其他的一些小问题"></a>其他的一些小问题</h2><p>1.由于上传日志的时候要同时具有文字与图片，需要判断图片的数量与字符串的长度，发现字符串的长度一直是1，开始以为是空格，后来发现是个图片占位符”\ufffc”</p>
+<p>2.给UITextView加一个placehorder的东西，用UILabel关闭交互后盖在textView上面，并在textDidChange代理与插入图片的成功的回调中设置placehorderLabel的text即可（插入图片不调用textDidChange代理方法）。</p>
+<p>3.做解析日志封面图与首段话的时候，发现一个好用的html解析器:<br><a href="https://github.com/topfunky/hpple" target="_blank" rel="external">TFHpple</a><br>功能强大</p>
+<h2 id="相关参考资料："><a href="#相关参考资料：" class="headerlink" title="相关参考资料："></a>相关参考资料：</h2><p><a href="http://icell.io/layout-using-textkit/" target="_blank" rel="external">TextKit介绍</a></p>
+<p><a href="http://icell.io/how-to-use-nstextattachment/" target="_blank" rel="external">NSTextAttachment介绍</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;iOS-RichTextEditor&quot;&gt;&lt;a href=&quot;#iOS-RichTextEditor&quot; class=&quot;headerlink&quot; title=&quot;iOS-RichTextEditor&quot;&gt;&lt;/a&gt;iOS-RichTextEditor&lt;/h1&gt;&lt;p&gt;最近项目中有个需求是这样的：用户编辑日志，包含文字和图片，并可保存草稿或编辑，效果类似下图所示&lt;/p&gt;
+&lt;p&gt;这是豆瓣的写日记功能，可以看到文字与图片是一起排版的，同时默认插入图片的时候是往下换行。&lt;br&gt;&lt;img src=&quot;http://o8qo56tin.bkt.clouddn.com/douban.png&quot; alt=&quot;&quot;&gt;  &lt;/p&gt;
+&lt;p&gt;研究这个需求的时候，最后想到的实现思路无非是两种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;用html编辑，这个只需要将前端同事的页面跟js文件嵌入，同时做React与Native端的交互，上传相片的时候OC将图片url参数传给js。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;iOS7之后苹果推出了TextKit，使用该框架将textView里的图片文字经过转义得到一个字符串，并传给后台。从服务器获取数据时在进行解析得到NSAttributedString交给textView，这个过程分上传与解析。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（在这里猜测豆瓣应该是用的第一种方式）&lt;/p&gt;
+&lt;p&gt;当时前端同事还没开始做这块，自己先用第2种方案实现，过程如下。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;如果是文字，直接输入即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;如果是图片，选择完图片的回调API里，将图片上传到服务器，拿到图片的url，然后再将图片插入textView。&lt;strong&gt;那么这里就有一个关键问题，在上传给服务器的字符串里，如何用相应的字符串表示图片？&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+  </entry>
+  
+</feed>

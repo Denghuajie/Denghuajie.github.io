@@ -1,0 +1,817 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="富士山下" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="iOS-RichTextEditor最近项目中有个需求是这样的：用户编辑日志，包含文字和图片，并可保存草稿或编辑，效果类似下图所示
+这是豆瓣的写日记功能，可以看到文字与图片是一起排版的，同时默认插入图片的时候是往下换行。  
+研究这个需求的时候，最后想到的实现思路无非是两种：
+
+用html编辑，这个只需要将前端同事的页面跟js文件嵌入，同时做React与Native端的交互，上传相片的时候OC将图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS编辑日志功能">
+<meta property="og:url" content="http://yoursite.com/2016/06/14/page/index.html">
+<meta property="og:site_name" content="富士山下">
+<meta property="og:description" content="iOS-RichTextEditor最近项目中有个需求是这样的：用户编辑日志，包含文字和图片，并可保存草稿或编辑，效果类似下图所示
+这是豆瓣的写日记功能，可以看到文字与图片是一起排版的，同时默认插入图片的时候是往下换行。  
+研究这个需求的时候，最后想到的实现思路无非是两种：
+
+用html编辑，这个只需要将前端同事的页面跟js文件嵌入，同时做React与Native端的交互，上传相片的时候OC将图">
+<meta property="og:image" content="http://o8qo56tin.bkt.clouddn.com/douban.png">
+<meta property="og:updated_time" content="2016-06-14T13:34:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS编辑日志功能">
+<meta name="twitter:description" content="iOS-RichTextEditor最近项目中有个需求是这样的：用户编辑日志，包含文字和图片，并可保存草稿或编辑，效果类似下图所示
+这是豆瓣的写日记功能，可以看到文字与图片是一起排版的，同时默认插入图片的时候是往下换行。  
+研究这个需求的时候，最后想到的实现思路无非是两种：
+
+用html编辑，这个只需要将前端同事的页面跟js文件嵌入，同时做React与Native端的交互，上传相片的时候OC将图">
+<meta name="twitter:image" content="http://o8qo56tin.bkt.clouddn.com/douban.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6295940034067432000,
+      author: '一直很ok'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/14/page/"/>
+
+  <title> iOS编辑日志功能 | 富士山下 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">富士山下</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS编辑日志功能
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-14T15:36:49+08:00" content="2016-06-14">
+              2016-06-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/14/page/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/14/page/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/14/page/" class="leancloud_visitors" data-flag-title="iOS编辑日志功能">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="iOS-RichTextEditor"><a href="#iOS-RichTextEditor" class="headerlink" title="iOS-RichTextEditor"></a>iOS-RichTextEditor</h1><p>最近项目中有个需求是这样的：用户编辑日志，包含文字和图片，并可保存草稿或编辑，效果类似下图所示</p>
+<p>这是豆瓣的写日记功能，可以看到文字与图片是一起排版的，同时默认插入图片的时候是往下换行。<br><img src="http://o8qo56tin.bkt.clouddn.com/douban.png" alt="">  </p>
+<p>研究这个需求的时候，最后想到的实现思路无非是两种：</p>
+<ul>
+<li><p>用html编辑，这个只需要将前端同事的页面跟js文件嵌入，同时做React与Native端的交互，上传相片的时候OC将图片url参数传给js。</p>
+</li>
+<li><p>iOS7之后苹果推出了TextKit，使用该框架将textView里的图片文字经过转义得到一个字符串，并传给后台。从服务器获取数据时在进行解析得到NSAttributedString交给textView，这个过程分上传与解析。</p>
+</li>
+</ul>
+<p>（在这里猜测豆瓣应该是用的第一种方式）</p>
+<p>当时前端同事还没开始做这块，自己先用第2种方案实现，过程如下。</p>
+<ul>
+<li><p>如果是文字，直接输入即可。</p>
+</li>
+<li><p>如果是图片，选择完图片的回调API里，将图片上传到服务器，拿到图片的url，然后再将图片插入textView。<strong>那么这里就有一个关键问题，在上传给服务器的字符串里，如何用相应的字符串表示图片？</strong></p>
+</li>
+</ul>
+<a id="more"></a>
+<p>个人思路如下：</p>
+<h2 id="上传阶段"><a href="#上传阶段" class="headerlink" title="上传阶段"></a>上传阶段</h2><p>创建一个类KLTextAttachment继承NSTextAttachment，该类用来持有富文本对应的UIImage，并且在转义的时候利用该类生成一个表示图片的img标签，在最后选择发布的时候，遍历textView的attributedText，只要是图片，转义为该标签，部分代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">- (NSString *)getPlainString &#123;</div><div class="line">    NSMutableString *plainString = [NSMutableString stringWithString:self.string];</div><div class="line">    __block NSUInteger base = 0;</div><div class="line"></div><div class="line">    [self enumerateAttribute:NSAttachmentAttributeName</div><div class="line">                     inRange:NSMakeRange(0, self.length)</div><div class="line">                     options:0</div><div class="line">                  usingBlock:^(id value, NSRange range, BOOL *stop) &#123;</div><div class="line">                      if (value &amp;&amp; [value isKindOfClass:[KLTextAttachment class]]) &#123;</div><div class="line"></div><div class="line">                          KLTextAttachment *attachment = (KLTextAttachment *)value;</div><div class="line">                          NSString *imgName = [attachment getHtmlFormatFileName];</div><div class="line">                          [plainString replaceCharactersInRange:NSMakeRange(range.location + base,range.length)</div><div class="line">                           withString:imgName];</div><div class="line">                          base += imgName.length - 1;</div><div class="line">                      &#125;</div><div class="line">                  &#125;];</div><div class="line"></div><div class="line">    return plainString;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么最后传给后台的字符串就是文字与图片拼接起来的字符串。</p>
+<h2 id="解析阶段"><a href="#解析阶段" class="headerlink" title="解析阶段"></a>解析阶段</h2><p>从后台获得的字符串类似@”这是一段文字&lt;<ios-img src="" 图片url""="">&gt;”</ios-img></p>
+<p>(多加了&lt;与ios-img是为了后面方便解析)</p>
+<p>解析过程如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">+ (NSAttributedString *)getRichTextFromIosString:(NSString *)dataString</div><div class="line">&#123;</div><div class="line">    NSArray *str = [dataString componentsSeparatedByString:@&quot;#separate#&quot;];</div><div class="line"></div><div class="line">    NSMutableAttributedString *richText = [[NSMutableAttributedString alloc] init];</div><div class="line"></div><div class="line">    for (int i = 0 ; i&lt; str.count; i++) &#123;</div><div class="line">        NSString *cString = str[i];</div><div class="line">        //图片url</div><div class="line">        if (cString.length &gt; 0) &#123;</div><div class="line">            if ([cString containsString:@&quot;http&quot;]) &#123;</div><div class="line"></div><div class="line">                //得到一个html</div><div class="line">                cString = [cString stringByReplacingOccurrencesOfString:@&quot;&lt;@ios-&quot; withString:@&quot;&lt;&quot;];</div><div class="line">                cString = [cString stringByReplacingOccurrencesOfString:@&quot;&apos;&quot; withString:@&quot;&quot;];</div><div class="line">                NSDictionary *options = @&#123;NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType&#125;;</div><div class="line">                NSAttributedString *string = [[NSAttributedString alloc] initWithData:[cString dataUsingEncoding:NSUnicodeStringEncoding] options:options documentAttributes:nil error:nil];</div><div class="line">                [richText appendAttributedString:string];</div><div class="line">            &#125;</div><div class="line">            //文字</div><div class="line">            else</div><div class="line">            &#123;</div><div class="line">                NSAttributedString * aString = [[NSAttributedString alloc] initWithString:cString attributes:@&#123;NSFontAttributeName: [UIFont systemFontOfSize:17]&#125;];</div><div class="line"></div><div class="line">                [richText appendAttributedString:aString];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return richText;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>先得到一个装有字符串的数组，把文字和图片分开，然后创建一个NSMutableAttributedString对象用来接收最后解析完的富文本。</p>
+<p>遍历该数组，如果是文字，直接转成NSAttributedString对象并用NSMutableAttributedString对象去拼接；如果是图片，将字符串转义为html标签，在用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSDictionary *options = @&#123;NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType&#125;;</div><div class="line">NSAttributedString *string = [[NSAttributedStringalloc] initWithData:[cString dataUsingEncoding:NSUnicodeStringEncoding] options:options documentAttributes:nilerror:nil];</div></pre></td></tr></table></figure>
+<p>转为NSAttributedString对象并拼接。</p>
+<p>最后得到的NSMutableAttributedString赋值给textView即可。</p>
+<p>看上去好像没什么问题，但是实际上发现如果是编辑草稿（保存在服务器），那么继续编辑的时候会碰到无法正确继续转义的问题，同时利用@{NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType}去生成代表图片的富文本是不对的，如果图片一多，必然加载会慢，textView只应该负责图片的排版渲染而不是下载。</p>
+<h2 id="下面是新的解析方式"><a href="#下面是新的解析方式" class="headerlink" title="下面是新的解析方式"></a>下面是新的解析方式</h2><p>拿到图片的url之后，利用url生成图片，并根据图片生成一个KLTextAttachment对象，最后利用该对象生成一个NSAttributedString：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">SDImageCache *imageCache = [SDImageCache sharedImageCache];</div><div class="line">                UIImage *image = [imageCache imageFromMemoryCacheForKey:[NSString stringWithFormat:@&quot;%@-draft&quot;, newString]];</div><div class="line">                image = image ? image : [imageCache imageFromDiskCacheForKey:[NSString stringWithFormat:@&quot;%@-draft&quot;, newString]];</div><div class="line">                if(!image)</div><div class="line">                &#123;</div><div class="line">                    NSData * data = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:newString]];</div><div class="line">                    UIImage *image = [[UIImage alloc]initWithData:data];</div><div class="line">                    //缓存图片</div><div class="line">                    [[SDImageCache sharedImageCache] storeImage:image forKey:[NSString stringWithFormat:@&quot;%@-draft&quot;, newString] toDisk:YES];</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                if (image) &#123;</div><div class="line">                        KLTextAttachment *klattchment = [self getImageAttachment:image url:newString];</div><div class="line">                        if (klattchment) &#123;</div><div class="line">                            NSAttributedString *attr = [NSAttributedString attributedStringWithAttachment:klattchment];</div><div class="line">                            [result addObject:attr];</div><div class="line">                        &#125;</div><div class="line"></div><div class="line">                    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSAttributedString *attr = [NSAttributedString attributedStringWithAttachment:klattchment];</div></pre></td></tr></table></figure>
+<p>这样一来就解决上述所说的问题。</p>
+<p>个人思路就是这些，如果有错误，欢迎指正。</p>
+<h2 id="其他的一些小问题"><a href="#其他的一些小问题" class="headerlink" title="其他的一些小问题"></a>其他的一些小问题</h2><p>1.由于上传日志的时候要同时具有文字与图片，需要判断图片的数量与字符串的长度，发现字符串的长度一直是1，开始以为是空格，后来发现是个图片占位符”\ufffc”</p>
+<p>2.给UITextView加一个placehorder的东西，用UILabel关闭交互后盖在textView上面，并在textDidChange代理与插入图片的成功的回调中设置placehorderLabel的text即可（插入图片不调用textDidChange代理方法）。</p>
+<p>3.做解析日志封面图与首段话的时候，发现一个好用的html解析器:<br><a href="https://github.com/topfunky/hpple" target="_blank" rel="external">TFHpple</a><br>功能强大</p>
+<h2 id="相关参考资料："><a href="#相关参考资料：" class="headerlink" title="相关参考资料："></a>相关参考资料：</h2><p><a href="http://icell.io/layout-using-textkit/" target="_blank" rel="external">TextKit介绍</a></p>
+<p><a href="http://icell.io/how-to-use-nstextattachment/" target="_blank" rel="external">NSTextAttachment介绍</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="胖码农要逆袭 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/14/page-1/" rel="prev" title="在cell里显示未知尺寸的网络图片">
+                在cell里显示未知尺寸的网络图片 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/14/page/"
+           data-title="iOS编辑日志功能" data-url="http://yoursite.com/2016/06/14/page/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o8qo56tin.bkt.clouddn.com/IMG_0121.PNG"
+               alt="胖码农要逆袭" />
+          <p class="site-author-name" itemprop="name">胖码农要逆袭</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Denghuajie" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1772719594" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/SS_Wiking" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#iOS-RichTextEditor"><span class="nav-number">1.</span> <span class="nav-text">iOS-RichTextEditor</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#上传阶段"><span class="nav-number">1.1.</span> <span class="nav-text">上传阶段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析阶段"><span class="nav-number">1.2.</span> <span class="nav-text">解析阶段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面是新的解析方式"><span class="nav-number">1.3.</span> <span class="nav-text">下面是新的解析方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他的一些小问题"><span class="nav-number">1.4.</span> <span class="nav-text">其他的一些小问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关参考资料："><span class="nav-number">1.5.</span> <span class="nav-text">相关参考资料：</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">胖码农要逆袭</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"Denghuajie"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Ob8hxI71iLjAfBk2fjG4u9dn-gzGzoHsz", "whUFXHbaGcEMJvTeKvrS2nDk");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
