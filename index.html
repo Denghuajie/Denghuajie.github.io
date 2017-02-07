@@ -245,116 +245,6 @@
             
               
                 
-                <a class="post-title-link" href="/2017/02/07/JS/" itemprop="url">
-                  Javascript笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-07T22:20:05+08:00" content="2017-02-07">
-              2017-02-07
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/02/07/JS/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/07/JS/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/02/07/JS/" class="leancloud_visitors" data-flag-title="Javascript笔记">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="JS中五种数据类型"><a href="#JS中五种数据类型" class="headerlink" title="JS中五种数据类型"></a>JS中五种数据类型</h1><p>华爷我GNXM</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/08/24/page-9/" itemprop="url">
                   写一个简单的post请求
                 </a>
@@ -1450,13 +1340,137 @@
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/14/page/" itemprop="url">
+                  iOS编辑日志功能
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-14T15:36:49+08:00" content="2016-06-14">
+              2016-06-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/14/page/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/14/page/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/14/page/" class="leancloud_visitors" data-flag-title="iOS编辑日志功能">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="iOS-RichTextEditor"><a href="#iOS-RichTextEditor" class="headerlink" title="iOS-RichTextEditor"></a>iOS-RichTextEditor</h1><p>最近项目中有个需求是这样的：用户编辑日志，包含文字和图片，并可保存草稿或编辑，效果类似下图所示</p>
+<p>这是豆瓣的写日记功能，可以看到文字与图片是一起排版的，同时默认插入图片的时候是往下换行。<br><img src="http://o8qo56tin.bkt.clouddn.com/douban.png" alt="">  </p>
+<p>研究这个需求的时候，最后想到的实现思路无非是两种：</p>
+<ul>
+<li><p>用html编辑，这个只需要将前端同事的页面跟js文件嵌入，同时做React与Native端的交互，上传相片的时候OC将图片url参数传给js。</p>
+</li>
+<li><p>iOS7之后苹果推出了TextKit，使用该框架将textView里的图片文字经过转义得到一个字符串，并传给后台。从服务器获取数据时在进行解析得到NSAttributedString交给textView，这个过程分上传与解析。</p>
+</li>
+</ul>
+<p>（在这里猜测豆瓣应该是用的第一种方式）</p>
+<p>当时前端同事还没开始做这块，自己先用第2种方案实现，过程如下。</p>
+<ul>
+<li><p>如果是文字，直接输入即可。</p>
+</li>
+<li><p>如果是图片，选择完图片的回调API里，将图片上传到服务器，拿到图片的url，然后再将图片插入textView。<strong>那么这里就有一个关键问题，在上传给服务器的字符串里，如何用相应的字符串表示图片？</strong></p>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/14/page/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
 
 
           </div>
@@ -1495,7 +1509,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
