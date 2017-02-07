@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>写一个简单的post请求 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近捣鼓前端，用ajax+一个粗糙的页面模仿了下登录的页面~
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&amp;qu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="写一个简单的post请求">
+<meta property="og:url" content="http://yoursite.com/2016/08/24/page-9/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近捣鼓前端，用ajax+一个粗糙的页面模仿了下登录的页面~
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&amp;qu">
+<meta property="og:image" content="http://o8qo56tin.bkt.clouddn.com/E5965DC3-4D24-4A2D-8C8A-C6EF0CA2B0F1.png">
+<meta property="og:updated_time" content="2016-08-24T13:49:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="写一个简单的post请求">
+<meta name="twitter:description" content="最近捣鼓前端，用ajax+一个粗糙的页面模仿了下登录的页面~
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&amp;qu">
+<meta name="twitter:image" content="http://o8qo56tin.bkt.clouddn.com/E5965DC3-4D24-4A2D-8C8A-C6EF0CA2B0F1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-page-9" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/24/page-9/" class="article-date">
+  <time datetime="2016-08-24T13:34:33.000Z" itemprop="datePublished">2016-08-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      写一个简单的post请求
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近捣鼓前端，用ajax+一个粗糙的页面模仿了下登录的页面~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;title&gt;登录&lt;/title&gt;</div><div class="line">    &lt;style type=&quot;text/css&quot;&gt;</div><div class="line">    .container&#123;width:100%; height: 300px; margin: 0 auto; position: relative;&#125;</div><div class="line">    .container h1&#123;text-align: center;&#125;</div><div class="line">    .account&#123;width: 300px; height: 50px; margin-top: 20px; margin-left: auto; margin-right: auto;&#125;</div><div class="line">    .account .myname&#123;margin-left: 16px&#125;</div><div class="line">    .pwd&#123;width: 300px; height: 30px; margin-left: auto; margin-right: auto;&#125;</div><div class="line">    .pwd .password&#123;margin-left: 16px;&#125;</div><div class="line">    .container .loginbtn&#123;display: block; margin-top:20px; margin-bottom: 20px; width:100px; height: 30px; margin-left: auto; margin-right: auto;&#125;</div><div class="line">    .result &#123;line-height: 50px; text-align:center; width: 300px; height: 50px; margin:0 auto; background: #33f;&#125;</div><div class="line">    &lt;/style&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;div class=&quot;container&quot;&gt;</div><div class="line">    &lt;h1&gt;登录页面&lt;/h1&gt;</div><div class="line">    &lt;div class=&quot;account&quot;&gt;请输入账号:&lt;input type=&quot;text&quot; name=&quot;username&quot; class=&quot;myname&quot; /&gt;&lt;/div&gt;</div><div class="line">&lt;br /&gt;</div><div class="line">&lt;div class=&quot;pwd&quot;&gt;请输入密码:&lt;input type=&quot;password&quot; name=&quot;password&quot; class=&quot;password&quot; /&gt;&lt;/div&gt;</div><div class="line">&lt;br /&gt;</div><div class="line">&lt;button class=&quot;loginbtn&quot; type=&quot;button&quot;&gt;登录&lt;/button&gt;</div><div class="line">&lt;div class=&quot;result&quot;&gt;输出结果&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;http://libs.baidu.com/jquery/2.0.0/jquery.min.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    $(&apos;.loginbtn&apos;).click(function() &#123;</div><div class="line">        var username = $(&apos;.myname&apos;).val();</div><div class="line">        var password = $(&apos;.password&apos;).val();</div><div class="line"></div><div class="line">        var url = &apos;/client/login&apos;;</div><div class="line"></div><div class="line">        $.ajax(&#123;</div><div class="line">            url: url,</div><div class="line">            type: &apos;POST&apos;,</div><div class="line">            dataType: &apos;json&apos;,</div><div class="line">            data: &#123;mobile: username,</div><div class="line">                   password: password&#125;,</div><div class="line">        &#125;)</div><div class="line">        .done(function(data) &#123;</div><div class="line">            if (data.code === 0) &#123;</div><div class="line">              $(&apos;.result&apos;).html(&apos;POST返回的结果&apos; + data.result.sessionId).css(&apos;background&apos;,&apos;red&apos;);</div><div class="line">            &#125;</div><div class="line">            else</div><div class="line">            &#123;</div><div class="line">               alert(data.err_msg);</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">        .fail(function(result) &#123;</div><div class="line">            alert(result.err_msg);</div><div class="line">            console.log(&quot;error&quot;);</div><div class="line">        &#125;)</div><div class="line">        .always(function() &#123;</div><div class="line">            console.log(&quot;complete&quot;);</div><div class="line">        &#125;);</div><div class="line"></div><div class="line"></div><div class="line">        // $.post(url, &#123;mobile: username, password:password&#125;, function(data, textStatus, xhr) &#123;</div><div class="line">        //     $(&apos;.result&apos;).html(&apos;post返回的结果&apos; + data.result.client.birthday).css(&apos;background&apos;,&apos;red&apos;);</div><div class="line">        //     console.log(data);</div><div class="line">        // &#125;);</div><div class="line">    &#125;);</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/E5965DC3-4D24-4A2D-8C8A-C6EF0CA2B0F1.png" alt=""></p>
+<p>Done~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/24/page-9/" data-id="ciyvmwv7o000d19va06swyvck" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/02/07/JS/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nieuwer</strong>
+      <div class="article-nav-title">
+        
+          Javascript笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/24/page-8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ouder</strong>
+      <div class="article-nav-title">iOS中设置状态栏样式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Labels</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archieven</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recente berichten</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/02/07/1/">Test</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/JS/">Javascript笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/24/page-9/">写一个简单的post请求</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/24/page-8/">iOS中设置状态栏样式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/28/page-7/">使用KVC修改UIAlertController的样式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

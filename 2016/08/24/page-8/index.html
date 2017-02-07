@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS中设置状态栏样式 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="iOS中默认状态栏样式为UIStatusBarStyleDefault，也就是黑色：
+
+如果要更改全局样式，以下两种方法是等价的：
+
+1234//在程序入口代码设置- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &amp;#123;  [">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS中设置状态栏样式">
+<meta property="og:url" content="http://yoursite.com/2016/08/24/page-8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="iOS中默认状态栏样式为UIStatusBarStyleDefault，也就是黑色：
+
+如果要更改全局样式，以下两种方法是等价的：
+
+1234//在程序入口代码设置- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &amp;#123;  [">
+<meta property="og:image" content="http://o8qo56tin.bkt.clouddn.com/5A9CDE39-7EDF-4F9E-A79E-871E1CBD3EE4.png">
+<meta property="og:image" content="http://o8qo56tin.bkt.clouddn.com/4944671C-6D82-4D1D-A106-E193E7C173F5.png">
+<meta property="og:image" content="http://o8qo56tin.bkt.clouddn.com/9BC3FC6F-B9E4-412D-896A-37F5B1EB5DA3.png">
+<meta property="og:image" content="http://o8qo56tin.bkt.clouddn.com/196B253C-2E4C-42E8-8D2B-891B4D368993.png">
+<meta property="og:updated_time" content="2016-08-24T13:26:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS中设置状态栏样式">
+<meta name="twitter:description" content="iOS中默认状态栏样式为UIStatusBarStyleDefault，也就是黑色：
+
+如果要更改全局样式，以下两种方法是等价的：
+
+1234//在程序入口代码设置- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &amp;#123;  [">
+<meta name="twitter:image" content="http://o8qo56tin.bkt.clouddn.com/5A9CDE39-7EDF-4F9E-A79E-871E1CBD3EE4.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-page-8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/24/page-8/" class="article-date">
+  <time datetime="2016-08-24T12:59:12.000Z" itemprop="datePublished">2016-08-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS中设置状态栏样式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>iOS中默认状态栏样式为UIStatusBarStyleDefault，也就是黑色：</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/5A9CDE39-7EDF-4F9E-A79E-871E1CBD3EE4.png" alt=""></p>
+<p>如果要更改全局样式，以下两种方法是等价的：</p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//在程序入口代码设置</div><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line">  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>并且在plist中增加一个属性，设置为NO：</strong></p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/4944671C-6D82-4D1D-A106-E193E7C173F5.png" alt=""></p>
+</li>
+</ul>
+<p><strong>如果缺少这个属性，代码设置的样式是不会生效的</strong></p>
+<ul>
+<li><p>或者直接plist中添加两个属性，就不需要代码设置了：</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/9BC3FC6F-B9E4-412D-896A-37F5B1EB5DA3.png" alt=""></p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/196B253C-2E4C-42E8-8D2B-891B4D368993.png" alt=""></p>
+</li>
+</ul>
+<p>可以看到样式生效了。</p>
+<p>如果说某个页面需要这个样式，而另外的页面需要另外一个样式呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">分别在viewWillAppear与viewWillDisAppear中更改样式与还原样式即可，缺点就是侧滑的时候会闪一下，不太美观，个人感觉最好在样式变化的页面禁用手势。</div></pre></td></tr></table></figure>
+<p>至于说<code>- (UIStatusBarStyle)preferredStatusBarStyle</code>这个API来设置的话，如果当前VC被其他VC（如导航控制器）包住的话，设置样式会有问题，需要重写所有外层VC的<code>- (UIViewController *)childViewControllerForStatusBarStyle</code>，而且plist文件中的View controller-based status bar appearance设置为YES才能生效，太麻烦了。</p>
+<p>以上是对设置状态栏样式的个人理解，说错了请指正。</p>
+<p>PS：提一下appearance这个省事的API，一次性设置全局外观，挺省事的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//设置导航栏背景颜色</div><div class="line">[[UINavigationBar appearance] setBackgroundImage:[[UIColor blackColor] color2Image] forBarMetrics:UIBarMetricsDefault];</div><div class="line"></div><div class="line">//设置导航栏字体颜色</div><div class="line">[[UINavigationBar appearance] setTitleTextAttributes: @&#123;NSForegroundColorAttributeName:[UIColor whiteColor]&#125;];</div><div class="line"></div><div class="line">//设置tabBarItem选中时的字体颜色</div><div class="line">[[UITabBarItem appearance]  setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName,nil] forState:UIControlStateSelected];</div><div class="line"></div><div class="line">//tabBarItem普通状态字体颜色</div><div class="line">[[UITabBarItem appearance]  setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:0.490 alpha:1.000], NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];</div><div class="line"></div><div class="line">//tabBar背景颜色</div><div class="line">[[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/24/page-8/" data-id="ciyvmwv7q000f19vavo4nxchm" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/24/page-9/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nieuwer</strong>
+      <div class="article-nav-title">
+        
+          写一个简单的post请求
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/28/page-7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ouder</strong>
+      <div class="article-nav-title">使用KVC修改UIAlertController的样式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Labels</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archieven</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recente berichten</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/02/07/1/">Test</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/JS/">Javascript笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/24/page-9/">写一个简单的post请求</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/24/page-8/">iOS中设置状态栏样式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/28/page-7/">使用KVC修改UIAlertController的样式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

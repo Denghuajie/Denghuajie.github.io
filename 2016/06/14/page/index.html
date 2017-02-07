@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS编辑日志功能 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="iOS-RichTextEditor最近项目中有个需求是这样的：用户编辑日志，包含文字和图片，并可保存草稿或编辑，效果类似下图所示
+这是豆瓣的写日记功能，可以看到文字与图片是一起排版的，同时默认插入图片的时候是往下换行。  
+研究这个需求的时候，最后想到的实现思路无非是两种：
+
+用html编辑，这个只需要将前端同事的页面跟js文件嵌入，同时做React与Native端的交互，上传相片的时候OC将图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS编辑日志功能">
+<meta property="og:url" content="http://yoursite.com/2016/06/14/page/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="iOS-RichTextEditor最近项目中有个需求是这样的：用户编辑日志，包含文字和图片，并可保存草稿或编辑，效果类似下图所示
+这是豆瓣的写日记功能，可以看到文字与图片是一起排版的，同时默认插入图片的时候是往下换行。  
+研究这个需求的时候，最后想到的实现思路无非是两种：
+
+用html编辑，这个只需要将前端同事的页面跟js文件嵌入，同时做React与Native端的交互，上传相片的时候OC将图">
+<meta property="og:image" content="http://o8qo56tin.bkt.clouddn.com/douban.png">
+<meta property="og:updated_time" content="2016-06-14T13:34:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS编辑日志功能">
+<meta name="twitter:description" content="iOS-RichTextEditor最近项目中有个需求是这样的：用户编辑日志，包含文字和图片，并可保存草稿或编辑，效果类似下图所示
+这是豆瓣的写日记功能，可以看到文字与图片是一起排版的，同时默认插入图片的时候是往下换行。  
+研究这个需求的时候，最后想到的实现思路无非是两种：
+
+用html编辑，这个只需要将前端同事的页面跟js文件嵌入，同时做React与Native端的交互，上传相片的时候OC将图">
+<meta name="twitter:image" content="http://o8qo56tin.bkt.clouddn.com/douban.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-page" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/14/page/" class="article-date">
+  <time datetime="2016-06-14T07:36:49.000Z" itemprop="datePublished">2016-06-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS编辑日志功能
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iOS-RichTextEditor"><a href="#iOS-RichTextEditor" class="headerlink" title="iOS-RichTextEditor"></a>iOS-RichTextEditor</h1><p>最近项目中有个需求是这样的：用户编辑日志，包含文字和图片，并可保存草稿或编辑，效果类似下图所示</p>
+<p>这是豆瓣的写日记功能，可以看到文字与图片是一起排版的，同时默认插入图片的时候是往下换行。<br><img src="http://o8qo56tin.bkt.clouddn.com/douban.png" alt="">  </p>
+<p>研究这个需求的时候，最后想到的实现思路无非是两种：</p>
+<ul>
+<li><p>用html编辑，这个只需要将前端同事的页面跟js文件嵌入，同时做React与Native端的交互，上传相片的时候OC将图片url参数传给js。</p>
+</li>
+<li><p>iOS7之后苹果推出了TextKit，使用该框架将textView里的图片文字经过转义得到一个字符串，并传给后台。从服务器获取数据时在进行解析得到NSAttributedString交给textView，这个过程分上传与解析。</p>
+</li>
+</ul>
+<p>（在这里猜测豆瓣应该是用的第一种方式）</p>
+<p>当时前端同事还没开始做这块，自己先用第2种方案实现，过程如下。</p>
+<ul>
+<li><p>如果是文字，直接输入即可。</p>
+</li>
+<li><p>如果是图片，选择完图片的回调API里，将图片上传到服务器，拿到图片的url，然后再将图片插入textView。<strong>那么这里就有一个关键问题，在上传给服务器的字符串里，如何用相应的字符串表示图片？</strong></p>
+</li>
+</ul>
+<a id="more"></a>
+<p>个人思路如下：</p>
+<h2 id="上传阶段"><a href="#上传阶段" class="headerlink" title="上传阶段"></a>上传阶段</h2><p>创建一个类KLTextAttachment继承NSTextAttachment，该类用来持有富文本对应的UIImage，并且在转义的时候利用该类生成一个表示图片的img标签，在最后选择发布的时候，遍历textView的attributedText，只要是图片，转义为该标签，部分代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">- (NSString *)getPlainString &#123;</div><div class="line">    NSMutableString *plainString = [NSMutableString stringWithString:self.string];</div><div class="line">    __block NSUInteger base = 0;</div><div class="line"></div><div class="line">    [self enumerateAttribute:NSAttachmentAttributeName</div><div class="line">                     inRange:NSMakeRange(0, self.length)</div><div class="line">                     options:0</div><div class="line">                  usingBlock:^(id value, NSRange range, BOOL *stop) &#123;</div><div class="line">                      if (value &amp;&amp; [value isKindOfClass:[KLTextAttachment class]]) &#123;</div><div class="line"></div><div class="line">                          KLTextAttachment *attachment = (KLTextAttachment *)value;</div><div class="line">                          NSString *imgName = [attachment getHtmlFormatFileName];</div><div class="line">                          [plainString replaceCharactersInRange:NSMakeRange(range.location + base,range.length)</div><div class="line">                           withString:imgName];</div><div class="line">                          base += imgName.length - 1;</div><div class="line">                      &#125;</div><div class="line">                  &#125;];</div><div class="line"></div><div class="line">    return plainString;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么最后传给后台的字符串就是文字与图片拼接起来的字符串。</p>
+<h2 id="解析阶段"><a href="#解析阶段" class="headerlink" title="解析阶段"></a>解析阶段</h2><p>从后台获得的字符串类似@”这是一段文字&lt;<ios-img src="" 图片url""="">&gt;”</ios-img></p>
+<p>(多加了&lt;与ios-img是为了后面方便解析)</p>
+<p>解析过程如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">+ (NSAttributedString *)getRichTextFromIosString:(NSString *)dataString</div><div class="line">&#123;</div><div class="line">    NSArray *str = [dataString componentsSeparatedByString:@&quot;#separate#&quot;];</div><div class="line"></div><div class="line">    NSMutableAttributedString *richText = [[NSMutableAttributedString alloc] init];</div><div class="line"></div><div class="line">    for (int i = 0 ; i&lt; str.count; i++) &#123;</div><div class="line">        NSString *cString = str[i];</div><div class="line">        //图片url</div><div class="line">        if (cString.length &gt; 0) &#123;</div><div class="line">            if ([cString containsString:@&quot;http&quot;]) &#123;</div><div class="line"></div><div class="line">                //得到一个html</div><div class="line">                cString = [cString stringByReplacingOccurrencesOfString:@&quot;&lt;@ios-&quot; withString:@&quot;&lt;&quot;];</div><div class="line">                cString = [cString stringByReplacingOccurrencesOfString:@&quot;&apos;&quot; withString:@&quot;&quot;];</div><div class="line">                NSDictionary *options = @&#123;NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType&#125;;</div><div class="line">                NSAttributedString *string = [[NSAttributedString alloc] initWithData:[cString dataUsingEncoding:NSUnicodeStringEncoding] options:options documentAttributes:nil error:nil];</div><div class="line">                [richText appendAttributedString:string];</div><div class="line">            &#125;</div><div class="line">            //文字</div><div class="line">            else</div><div class="line">            &#123;</div><div class="line">                NSAttributedString * aString = [[NSAttributedString alloc] initWithString:cString attributes:@&#123;NSFontAttributeName: [UIFont systemFontOfSize:17]&#125;];</div><div class="line"></div><div class="line">                [richText appendAttributedString:aString];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return richText;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>先得到一个装有字符串的数组，把文字和图片分开，然后创建一个NSMutableAttributedString对象用来接收最后解析完的富文本。</p>
+<p>遍历该数组，如果是文字，直接转成NSAttributedString对象并用NSMutableAttributedString对象去拼接；如果是图片，将字符串转义为html标签，在用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSDictionary *options = @&#123;NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType&#125;;</div><div class="line">NSAttributedString *string = [[NSAttributedStringalloc] initWithData:[cString dataUsingEncoding:NSUnicodeStringEncoding] options:options documentAttributes:nilerror:nil];</div></pre></td></tr></table></figure>
+<p>转为NSAttributedString对象并拼接。</p>
+<p>最后得到的NSMutableAttributedString赋值给textView即可。</p>
+<p>看上去好像没什么问题，但是实际上发现如果是编辑草稿（保存在服务器），那么继续编辑的时候会碰到无法正确继续转义的问题，同时利用@{NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType}去生成代表图片的富文本是不对的，如果图片一多，必然加载会慢，textView只应该负责图片的排版渲染而不是下载。</p>
+<h2 id="下面是新的解析方式"><a href="#下面是新的解析方式" class="headerlink" title="下面是新的解析方式"></a>下面是新的解析方式</h2><p>拿到图片的url之后，利用url生成图片，并根据图片生成一个KLTextAttachment对象，最后利用该对象生成一个NSAttributedString：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">SDImageCache *imageCache = [SDImageCache sharedImageCache];</div><div class="line">                UIImage *image = [imageCache imageFromMemoryCacheForKey:[NSString stringWithFormat:@&quot;%@-draft&quot;, newString]];</div><div class="line">                image = image ? image : [imageCache imageFromDiskCacheForKey:[NSString stringWithFormat:@&quot;%@-draft&quot;, newString]];</div><div class="line">                if(!image)</div><div class="line">                &#123;</div><div class="line">                    NSData * data = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:newString]];</div><div class="line">                    UIImage *image = [[UIImage alloc]initWithData:data];</div><div class="line">                    //缓存图片</div><div class="line">                    [[SDImageCache sharedImageCache] storeImage:image forKey:[NSString stringWithFormat:@&quot;%@-draft&quot;, newString] toDisk:YES];</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                if (image) &#123;</div><div class="line">                        KLTextAttachment *klattchment = [self getImageAttachment:image url:newString];</div><div class="line">                        if (klattchment) &#123;</div><div class="line">                            NSAttributedString *attr = [NSAttributedString attributedStringWithAttachment:klattchment];</div><div class="line">                            [result addObject:attr];</div><div class="line">                        &#125;</div><div class="line"></div><div class="line">                    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSAttributedString *attr = [NSAttributedString attributedStringWithAttachment:klattchment];</div></pre></td></tr></table></figure>
+<p>这样一来就解决上述所说的问题。</p>
+<p>个人思路就是这些，如果有错误，欢迎指正。</p>
+<h2 id="其他的一些小问题"><a href="#其他的一些小问题" class="headerlink" title="其他的一些小问题"></a>其他的一些小问题</h2><p>1.由于上传日志的时候要同时具有文字与图片，需要判断图片的数量与字符串的长度，发现字符串的长度一直是1，开始以为是空格，后来发现是个图片占位符”\ufffc”</p>
+<p>2.给UITextView加一个placehorder的东西，用UILabel关闭交互后盖在textView上面，并在textDidChange代理与插入图片的成功的回调中设置placehorderLabel的text即可（插入图片不调用textDidChange代理方法）。</p>
+<p>3.做解析日志封面图与首段话的时候，发现一个好用的html解析器:<br><a href="https://github.com/topfunky/hpple" target="_blank" rel="external">TFHpple</a><br>功能强大</p>
+<h2 id="相关参考资料："><a href="#相关参考资料：" class="headerlink" title="相关参考资料："></a>相关参考资料：</h2><p><a href="http://icell.io/layout-using-textkit/" target="_blank" rel="external">TextKit介绍</a></p>
+<p><a href="http://icell.io/how-to-use-nstextattachment/" target="_blank" rel="external">NSTextAttachment介绍</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/06/14/page/" data-id="ciyvmwv7p000e19vaaulct6ar" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/06/14/page-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nieuwer</strong>
+      <div class="article-nav-title">
+        
+          在cell里显示未知尺寸的网络图片
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Labels</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archieven</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recente berichten</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/02/07/1/">Test</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/JS/">Javascript笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/24/page-9/">写一个简单的post请求</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/24/page-8/">iOS中设置状态栏样式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/28/page-7/">使用KVC修改UIAlertController的样式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

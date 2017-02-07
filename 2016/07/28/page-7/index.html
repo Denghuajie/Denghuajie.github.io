@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用KVC修改UIAlertController的样式 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近有个需求如图:
+
+看来是要自己自定义一个View的节奏，后来去网上搜了下资料，捣鼓了下UIAlertController，还真的实现了这种效果，标题、textField、按钮的文字大小与颜色都可以自己修改，原理就是利用KVC：
+1234567NSDictionary * attributes = @&amp;#123;NSFontAttributeName : subTitleFont, NSPara">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用KVC修改UIAlertController的样式">
+<meta property="og:url" content="http://yoursite.com/2016/07/28/page-7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近有个需求如图:
+
+看来是要自己自定义一个View的节奏，后来去网上搜了下资料，捣鼓了下UIAlertController，还真的实现了这种效果，标题、textField、按钮的文字大小与颜色都可以自己修改，原理就是利用KVC：
+1234567NSDictionary * attributes = @&amp;#123;NSFontAttributeName : subTitleFont, NSPara">
+<meta property="og:image" content="http://o8qo56tin.bkt.clouddn.com/6F180CC0C66B7F02393196EAC48AAB92.jpg">
+<meta property="og:image" content="http://o8qo56tin.bkt.clouddn.com/E0104DB6-E645-49A8-83B7-DD361FB3E1F7.png">
+<meta property="og:image" content="http://o8qo56tin.bkt.clouddn.com/1B21DDB2-7391-4F54-A8BE-789C0D93CCCD.png">
+<meta property="og:updated_time" content="2016-07-28T14:58:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用KVC修改UIAlertController的样式">
+<meta name="twitter:description" content="最近有个需求如图:
+
+看来是要自己自定义一个View的节奏，后来去网上搜了下资料，捣鼓了下UIAlertController，还真的实现了这种效果，标题、textField、按钮的文字大小与颜色都可以自己修改，原理就是利用KVC：
+1234567NSDictionary * attributes = @&amp;#123;NSFontAttributeName : subTitleFont, NSPara">
+<meta name="twitter:image" content="http://o8qo56tin.bkt.clouddn.com/6F180CC0C66B7F02393196EAC48AAB92.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-page-7" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/28/page-7/" class="article-date">
+  <time datetime="2016-07-28T14:46:39.000Z" itemprop="datePublished">2016-07-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用KVC修改UIAlertController的样式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近有个需求如图:</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/6F180CC0C66B7F02393196EAC48AAB92.jpg" alt=""></p>
+<p>看来是要自己自定义一个View的节奏，后来去网上搜了下资料，捣鼓了下UIAlertController，还真的实现了这种效果，标题、textField、按钮的文字大小与颜色都可以自己修改，原理就是利用KVC：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSDictionary * attributes = @&#123;NSFontAttributeName : subTitleFont, NSParagraphStyleAttributeName : paragraphStyle, NSForegroundColorAttributeName: subTitleColor&#125;;</div><div class="line"></div><div class="line">NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:subTitle];</div><div class="line"></div><div class="line">[attributedTitle addAttributes:attributes range:NSMakeRange(0, subTitle.length)];</div><div class="line">    </div><div class="line">[alertVC setValue:attributedTitle forKey:@&quot;attributedMessage&quot;];</div></pre></td></tr></table></figure>
+<p>类似这种富文本赋值，用runtime打印下UIAlertController类就不难理解：</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/E0104DB6-E645-49A8-83B7-DD361FB3E1F7.png" alt=""></p>
+<p>所以用KVC将富文本赋值过去就行。</p>
+<p>后来看看UIAlertView能不能用类似的原理去实现同样的效果，发现是不行的：</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/1B21DDB2-7391-4F54-A8BE-789C0D93CCCD.png" alt=""></p>
+<p>UIAlertView的成员变量不支持富文本属性，over~</p>
+<p>-EOF-</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/07/28/page-7/" data-id="ciyvmwv7m000c19vayczbv6ww" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/24/page-8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nieuwer</strong>
+      <div class="article-nav-title">
+        
+          iOS中设置状态栏样式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/07/page-6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ouder</strong>
+      <div class="article-nav-title">踩坑</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Labels</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archieven</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recente berichten</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/02/07/1/">Test</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/JS/">Javascript笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/24/page-9/">写一个简单的post请求</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/24/page-8/">iOS中设置状态栏样式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/28/page-7/">使用KVC修改UIAlertController的样式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

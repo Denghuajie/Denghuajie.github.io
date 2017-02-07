@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>尽量用枚举器、迭代器，少用for循环 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="通常我们遍历数组看起来像是这样（使用for循环）：1234567NSArray *anArray = /*...*/;for(int i = 0; i &amp;lt; anArray.count; i++)&amp;#123;   id object = anArray[i];   //对这个object做点什么...   &amp;#125;
+如果换成遍历字典或者set，那么复杂点：
+
+字典
+
+123456789NS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="尽量用枚举器、迭代器，少用for循环">
+<meta property="og:url" content="http://yoursite.com/2016/06/29/page-5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="通常我们遍历数组看起来像是这样（使用for循环）：1234567NSArray *anArray = /*...*/;for(int i = 0; i &amp;lt; anArray.count; i++)&amp;#123;   id object = anArray[i];   //对这个object做点什么...   &amp;#125;
+如果换成遍历字典或者set，那么复杂点：
+
+字典
+
+123456789NS">
+<meta property="og:updated_time" content="2016-06-29T16:38:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="尽量用枚举器、迭代器，少用for循环">
+<meta name="twitter:description" content="通常我们遍历数组看起来像是这样（使用for循环）：1234567NSArray *anArray = /*...*/;for(int i = 0; i &amp;lt; anArray.count; i++)&amp;#123;   id object = anArray[i];   //对这个object做点什么...   &amp;#125;
+如果换成遍历字典或者set，那么复杂点：
+
+字典
+
+123456789NS">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-page-5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/29/page-5/" class="article-date">
+  <time datetime="2016-06-29T15:28:01.000Z" itemprop="datePublished">2016-06-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      尽量用枚举器、迭代器，少用for循环
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="通常我们遍历数组看起来像是这样（使用for循环）："><a href="#通常我们遍历数组看起来像是这样（使用for循环）：" class="headerlink" title="通常我们遍历数组看起来像是这样（使用for循环）："></a>通常我们遍历数组看起来像是这样（使用for循环）：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSArray *anArray = /*...*/;</div><div class="line">for(int i = 0; i &lt; anArray.count; i++)</div><div class="line">&#123;</div><div class="line">   id object = anArray[i];</div><div class="line">   //对这个object做点什么...</div><div class="line">   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果换成遍历字典或者set，那么复杂点：</p>
+<ul>
+<li>字典</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">NSDictionary *aDictionary = /*...*/;</div><div class="line">NSArray *allKeys = [aDictionary allKeys];</div><div class="line">for(int i = 0; i &lt; allKeys.count; i++)</div><div class="line">&#123;</div><div class="line">   id key = allKeys[i];</div><div class="line">   id value = aDictionary[key];</div><div class="line">   //对这个`key`或`value`做点什么...</div><div class="line">   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Set</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSSet *aSet = /*...*/;</div><div class="line">NSArray *allObjects = [aSet allObjects];</div><div class="line">for(int i = 0; i &lt; allObjects.count; i++)</div><div class="line">&#123;</div><div class="line">   id object = allObjects[i];</div><div class="line">   //对这个object做点什么...</div><div class="line">   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由于字典与Set都是无序的，不能直接用特定的下标去集合里取值，所有要先获取字典的所有key与Set的所有object，在获得的有序数组上遍历，以访问集合里的值。创建这个附加数组会有额外的开销，同时多创建了一个数组对象。</p>
+<h3 id="利用Objective-C的枚举器来遍历可以避免创建这种中介数组："><a href="#利用Objective-C的枚举器来遍历可以避免创建这种中介数组：" class="headerlink" title="利用Objective-C的枚举器来遍历可以避免创建这种中介数组："></a>利用Objective-C的枚举器来遍历可以避免创建这种中介数组：</h3><h4 id="NSEnumerator"><a href="#NSEnumerator" class="headerlink" title="NSEnumerator"></a>NSEnumerator</h4><ul>
+<li><p>遍历数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSArray *anArray = /*...*/;</div><div class="line">NSEnumerator *enumerator = [anArray objectEnumerator];</div><div class="line">id object;</div><div class="line">while ((object = [enumerator nextObject]) != nil)</div><div class="line">&#123;</div><div class="line">   //对这个object做点什么...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>遍历字典</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSDictionary *aDictionary = /*...*/;  </div><div class="line">NSEnumerator *enumerator = [aDictionary keyEnumerator];</div><div class="line">id key;</div><div class="line">while ((key = [enumerator nextObject]) != nil)</div><div class="line">&#123;</div><div class="line">   id value = aDictionary[key];</div><div class="line">   //对这个`key`或`value`做点什么...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>遍历Set</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSSet *aSet = /*...*/;</div><div class="line">NSEnumerator *enumerator = [aSet objectEnumerator];</div><div class="line">id object;</div><div class="line">while ((object = [enumerator nextObject]) != nil)</div><div class="line">&#123;</div><div class="line">   //对这个object做点什么...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>可以看到无论是遍历哪种集合，语法都是类似的。</p>
+<h4 id="快速遍历"><a href="#快速遍历" class="headerlink" title="快速遍历"></a>快速遍历</h4><p>快速遍历与上文的NSEnumerator来遍历差不多，语法上更简洁。</p>
+<ul>
+<li><p>遍历数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSArray *anArray = /*...*/;</div><div class="line">for(id object in anArray)</div><div class="line">&#123;</div><div class="line">   //对这个object做点什么...</div><div class="line">   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>遍历字典</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSDictionary *aDictionary = /*...*/;  </div><div class="line">for(id key in aDictionary)</div><div class="line">&#123;</div><div class="line">   id value = aDictionary[key];</div><div class="line">   //对这个`key`或`value`做点什么...  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>然而这个方法最大的缺点在于无法获取当前遍历操作所针对的下标，这是实际开发中经常需要获取的值。</strong></p>
+<h4 id="基于block的枚举器"><a href="#基于block的枚举器" class="headerlink" title="基于block的枚举器"></a>基于block的枚举器</h4><p>基于块来实现遍历的API：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (void)enumerateObjectsUsingBlock:(void (^)(ObjectType obj, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);</div></pre></td></tr></table></figure>
+<p>这个块有三个参数，分别是当前迭代针对的对象、所针对的下标、以及指向布尔值的指针。通过第三个参数可以终止遍历操作。</p>
+<p>例如遍历数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">  NSArray *anArray = /*...*/;</div><div class="line">[anArray enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL * _Nonnull stop) &#123;</div><div class="line">    //对这个object做点什么...</div><div class="line">    if(shouldStop)</div><div class="line">    &#123;</div><div class="line">       *stop = YES;</div><div class="line">    &#125;</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<p>遍历字典会稍有不同：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSDictionary *aDictionary = /*...*/; </div><div class="line">  [aDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) &#123;</div><div class="line">      //对这个`key`或`value`做点什么... </div><div class="line">      if(shouldStop)</div><div class="line">      &#123;</div><div class="line">         *stop = YES;</div><div class="line">      &#125;</div><div class="line">  &#125;];</div></pre></td></tr></table></figure>
+<p>这种方式的好处是：</p>
+<ul>
+<li>遍历时直接从block获取更多信息，如当前所针对的下标。</li>
+</ul>
+<ul>
+<li><p>遍历字典时无需额外编码，同时获取key与value，省去了根据key去查找value的这一步，这就有性能上的优势，因为字典的数据结构本来就是key与value一起存储的。</p>
+</li>
+<li><p>能够避免类型转换，通过修改block参数，直接指定遍历的对象类型，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//字典中的对象全是NSString</div><div class="line">NSDictionary *aDictionary = /*...*/; </div><div class="line">  [aDictionary enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL * _Nonnull stop) &#123;</div><div class="line">      //对这个`key`或`value`做点什么... </div><div class="line">      if(shouldStop)</div><div class="line">      &#123;</div><div class="line">         *stop = YES;</div><div class="line">      &#125;</div><div class="line">  &#125;];</div></pre></td></tr></table></figure>
+<p>一般是提前知道了集合里的对象类型，就可以在block参数中直接指定。</p>
+</li>
+</ul>
+<h4 id="再举个项目的例子"><a href="#再举个项目的例子" class="headerlink" title="再举个项目的例子"></a>再举个项目的例子</h4><p>如果要在一个模型数组中根据一个id去查找对应的模型，并且用这个模型重新赋值给某个cell持有的模型(改变某个属性)，最后刷新数据，那么用for循环是这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">SomeModel *cellModel = self.dataList[indexPath.section];</div><div class="line">for(int i = 0; i &lt; self.dataList.count; i++)</div><div class="line">&#123;</div><div class="line">  SomeModel *model = self.dataList[i];</div><div class="line">  if([model.someId isEqualToString:cellModel.someId])</div><div class="line">  &#123;</div><div class="line">     cellModel.someValue = model.someValue;</div><div class="line">     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:i] withRowAnimation:UITableViewRowAnimationNone];</div><div class="line">     break;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果使用枚举器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">SomeModel *cellModel = self.dataList[indexPath.section];</div><div class="line">NSUInteger index = [self.dataList indexOfObjectPassingTest:^BOOL(SomeModel *model, NSUInteger idx, BOOL * _Nonnull stop) &#123;</div><div class="line">                   cellModel.someValue = [model.someId isEqualToString:cellModel.someId] ? model.someValue : cellModel.someValue;</div><div class="line">                    return [model.someId isEqualToString:cellModel.someId];</div><div class="line">                &#125;];</div><div class="line">                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationNone];</div></pre></td></tr></table></figure>
+<p>最后，老是用for循环不觉得太low了吗，使用迭代器枚举器瞬间提高逼格了有木有，哈哈~~~</p>
+<p>-EOF-</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/06/29/page-5/" data-id="ciyvmwv7k000919vazbt4y0bq" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/07/page-6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nieuwer</strong>
+      <div class="article-nav-title">
+        
+          踩坑
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/06/28/page-4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ouder</strong>
+      <div class="article-nav-title">升级CoCoaPods之后的格式变动问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Labels</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archieven</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recente berichten</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/02/07/1/">Test</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/JS/">Javascript笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/24/page-9/">写一个简单的post请求</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/24/page-8/">iOS中设置状态栏样式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/28/page-7/">使用KVC修改UIAlertController的样式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
