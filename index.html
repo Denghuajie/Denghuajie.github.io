@@ -247,6 +247,132 @@
             
               
                 
+                <a class="post-title-link" href="/2017/03/13/page-10/" itemprop="url">
+                  小程序中的微信支付
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-13T22:27:58+08:00" content="2017-03-13">
+              2017-03-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/13/page-10/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/13/page-10/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/03/13/page-10/" class="leancloud_visitors" data-flag-title="小程序中的微信支付">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近做小程序，要做一个微信支付的功能，按照微信小程序的官网文档是这样的：</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/98CA0A2B-0B28-422C-8790-6726C35F4864.png" alt=""></p>
+<p>小程序前端实现的逻辑一般是：先去跟己方的后台交互，post请求带上token与订单号等参数，后台返回微信支付所需的时间戳、签名等参数。</p>
+<p>参数后台已经全部返回过来了，按小程序的文档，按部就班的在真机上调起微信支付时，却发现报错：</p>
+<p><img src="http://o8qo56tin.bkt.clouddn.com/B0CD69BA-D617-4DFE-BF91-C982B42A8932.png" alt=""></p>
+<p>请不要到处去找total_fee这个参数的问题，其实是package的格式不对，后台返回的参数应该是这样的：”<strong>prepay_id=wx<strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong>“，如果报这个错，就是格式不对，记住prepay_id的<strong><em>下划线</em></strong>不能少！！！</p>
+<p>接着是第二个坑：</p>
+<p> <img src="http://o8qo56tin.bkt.clouddn.com/32EC988F-0745-4EDA-9DDC-905E590376CD.png" alt=""></p>
+<p>这次就是直接签名不对，碰到这个，请导入这个文件：</p>
+<p><a href="http://o8qo56tin.bkt.clouddn.com/md5.js" target="_blank" rel="external">http://o8qo56tin.bkt.clouddn.com/md5.js</a></p>
+<p>在相应的js文件里引入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">注意文件路径是否正确！！！</div><div class="line">*/</div><div class="line">var md5 = require(&apos;../../utils/md5.js&apos;)</div></pre></td></tr></table></figure>
+<p>自己在前端走一遍逻辑：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//小程序id</div><div class="line">var appId = &apos;&apos;;</div><div class="line">//商户API密钥</div><div class="line">var key = &apos;&apos;;</div><div class="line">//请自行填上以上参数，然后生成签名</div><div class="line">var sign = &quot;appId=&quot; + appId +  &quot;&amp;nonceStr=&quot; + args.nonceStr + &quot;&amp;package=&quot; + args.package + &quot;&amp;signType=MD5&amp;timeStamp=&quot; + args.timeStamp + &quot;&amp;key=&quot; + key;</div></pre></td></tr></table></figure>
+<p>最后调用微信支付：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">wx.requestPayment(</div><div class="line">&#123;</div><div class="line">&apos;timeStamp&apos;: &apos;&apos;,</div><div class="line">&apos;nonceStr&apos;: &apos;&apos;,</div><div class="line">&apos;package&apos;: &apos;&apos;,</div><div class="line">&apos;signType&apos;: &apos;MD5&apos;,</div><div class="line">&apos;paySign&apos;: sign,</div><div class="line">&apos;success&apos;:function(res)&#123;&#125;,</div><div class="line">&apos;fail&apos;:function(res)&#123;&#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>如果可以走通，恭喜你，就是后台的锅了，放心的去怼后台吧！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/02/08/解决hexo的“DTraceProviderBindings 'MODULE_NOT_FOUND'“问题/" itemprop="url">
                   解决hexo的“DTraceProviderBindings 'MODULE_NOT_FOUND'“问题
                 </a>
@@ -1348,118 +1474,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/14/page-1/" itemprop="url">
-                  在cell里显示未知尺寸的网络图片
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-14T19:26:03+08:00" content="2016-06-14">
-              2016-06-14
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/14/page-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/14/page-1/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/14/page-1/" class="leancloud_visitors" data-flag-title="在cell里显示未知尺寸的网络图片">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="网络图片在没返回之前是不知道图片尺寸大小的，在cell里展示又需要得知图片宽高，怎么做呢？"><a href="#网络图片在没返回之前是不知道图片尺寸大小的，在cell里展示又需要得知图片宽高，怎么做呢？" class="headerlink" title="网络图片在没返回之前是不知道图片尺寸大小的，在cell里展示又需要得知图片宽高，怎么做呢？"></a>网络图片在没返回之前是不知道图片尺寸大小的，在cell里展示又需要得知图片宽高，怎么做呢？</h3><p>利用SDWebImage缓存图片的原理设置约束即可：</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/14/page-1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1505,7 +1519,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
