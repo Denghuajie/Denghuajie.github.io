@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>关于项目中Accessibility的一些总结 | 富士山下</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="最近在项目中第一次用到了accessibility，坑还是挺多的，而且由于国内做这方面的app很少， 网上的资料也不是很多， 有些坑都是自己摸索过来的，特此记录一下。  首先是一些基础的知识：主要是通过isAccessibilityElement这个属性去设置是否开启accessibility的，然后UIKit中的很多元素默认都是支持accessibility的， 比如以下控件：      UIL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于项目中Accessibility的一些总结">
+<meta property="og:url" content="https://denghuajie.github.io/2023/02/12/%E5%85%B3%E4%BA%8E%E9%A1%B9%E7%9B%AE%E4%B8%ADAccessibility%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="富士山下">
+<meta property="og:description" content="最近在项目中第一次用到了accessibility，坑还是挺多的，而且由于国内做这方面的app很少， 网上的资料也不是很多， 有些坑都是自己摸索过来的，特此记录一下。  首先是一些基础的知识：主要是通过isAccessibilityElement这个属性去设置是否开启accessibility的，然后UIKit中的很多元素默认都是支持accessibility的， 比如以下控件：      UIL">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-12T13:06:00.000Z">
+<meta property="article:modified_time" content="2023-02-12T14:22:35.770Z">
+<meta property="article:author" content="Michael Deng">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="富士山下" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">富士山下</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://denghuajie.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-关于项目中Accessibility的一些总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/02/12/%E5%85%B3%E4%BA%8E%E9%A1%B9%E7%9B%AE%E4%B8%ADAccessibility%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2023-02-12T13:06:00.000Z" itemprop="datePublished">2023-02-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      关于项目中Accessibility的一些总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="最近在项目中第一次用到了accessibility，坑还是挺多的，而且由于国内做这方面的app很少，-网上的资料也不是很多，-有些坑都是自己摸索过来的，特此记录一下。"><a href="#最近在项目中第一次用到了accessibility，坑还是挺多的，而且由于国内做这方面的app很少，-网上的资料也不是很多，-有些坑都是自己摸索过来的，特此记录一下。" class="headerlink" title="最近在项目中第一次用到了accessibility，坑还是挺多的，而且由于国内做这方面的app很少， 网上的资料也不是很多， 有些坑都是自己摸索过来的，特此记录一下。"></a>最近在项目中第一次用到了accessibility，坑还是挺多的，而且由于国内做这方面的app很少， 网上的资料也不是很多， 有些坑都是自己摸索过来的，特此记录一下。</h2><br>
+
+<h2 id="首先是一些基础的知识："><a href="#首先是一些基础的知识：" class="headerlink" title="首先是一些基础的知识："></a>首先是一些基础的知识：</h2><p>主要是通过isAccessibilityElement这个属性去设置是否开启accessibility的，然后UIKit中的很多元素默认都是支持accessibility的， 比如以下控件：</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>UILabel</th>
+<th>UIButton</th>
+<th>UITextView</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>isAccessibilityElement</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>accessibilityTraits</td>
+<td>.staticText</td>
+<td>.none</td>
+<td>.none</td>
+</tr>
+<tr>
+<td>accessibilityLabel</td>
+<td>label.text对应的字符串</td>
+<td>nil</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>accessibilityValue</td>
+<td>nil</td>
+<td>nil</td>
+<td>textView对应的字符串</td>
+</tr>
+</tbody></table>
+<hr>
+<p>自定义的view通过设置isAccessibilityElement&#x3D;true就能打开，在通过设置accessibilityLabel就可以让voiceover读出对应的说明，accessibilityValue跟accessibilityHint是对accessibilityLabel的补充，一般设置accessibilityHint就够用了，朗读顺序是：accessibilityLabel→accessibilityValue→accessibilityTraits→accessibilityHint。</p>
+<h2 id="接下来是项目中碰到的一些问题："><a href="#接下来是项目中碰到的一些问题：" class="headerlink" title="接下来是项目中碰到的一些问题："></a>接下来是项目中碰到的一些问题：</h2><p>1、焦点问题</p>
+<p>很多tableviewcell或者按钮点击打开一个新的界面之后，关闭这个界面，返回上个界面的时候，按照原则要求应该是焦点回到触发打开新界面的控件上。这时候一般系统都不会自动控制， 需要我们手动加上代码。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">UIAccessibility</span>.post(notification: .screenChanged, argument: <span class="string">&quot;需要聚焦的控件&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li>tableView的刷新问题</li>
+</ol>
+<p>项目中，有一个cell负责点击后刷新selected状态， 点击后voiceover会朗读一次，这时候已经赋值给cell正确的accessibilityLabel状态了(…, selected)，然后voiceover读出来的是更新前的状态(not selected)。如果是普通的view，那么点击后voiceover就不会自动朗读一次，切换别的元素之后在切换回来读出来的状态也是对的。</p>
+<p>而且只要刷新数据，还有其他坑， 比如当前停留在cell的焦点会到tableView的第一个元素去，造成焦点混乱。</p>
+<p>结论就是如果涉及到tableView并且需要刷新数据的业务场景，如果需要支持accessibility，请慎用刷新功能。或者将view扔到sectionHeaderView，然后cell的数量为0。</p>
+<p>在项目中因为这个问题，导致很多界面都需要重写一遍， 花了很多时间。(改写成scrollView或者上面提到的方案)。</p>
+<ol start="3">
+<li>textView的相关问题</li>
+</ol>
+<ul>
+<li><p>上面也说到了textView的accessibilityValue是textview当前的text，但是accessibilityLabel是空值，这时候如果给textView赋值带图片的富文本，那么读出来是这样的：前面的文字读完后， 读到富文本的图片时，”附件 png(根据图片格式而定)”，那么这显然不是我们想要的。解决方案是accessibilityLabel赋值textView富文本对应的text，然后accessibilityValue置空，否则会读两次。</p>
+</li>
+<li><p>textView的代理方法问题， 之前用的是这个方法:</p>
+</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> <span class="title function_">textView</span>(<span class="keyword">_</span> <span class="params">textView</span>: <span class="type">UITextView</span>, <span class="params">shouldInteractWith</span> <span class="params">URL</span>: <span class="type">URL</span>, <span class="params">in</span> <span class="params">characterRange</span>: <span class="type">NSRange</span>) -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个方法在ios10.0就过时了，在正常状态下是没问题的，但是如果在voiceover的情况下，例如双击(等于普通模式的单击)， 这时候会调用两次这个方法:joy:，造成一些bug。同时根据网上的资料，3d touch也有这个情况，这个方法会调用两次(本人没验证， 有兴趣的朋友可以自己试试)。</p>
+<p>正确做法是用下面的方法替换：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> <span class="title function_">textView</span>(<span class="keyword">_</span> <span class="params">textView</span>: <span class="type">UITextView</span>, <span class="params">shouldInteractWith</span> <span class="params">URL</span>: <span class="type">URL</span>, <span class="params">in</span> <span class="params">characterRange</span>: <span class="type">NSRange</span>, <span class="params">interaction</span>: <span class="type">UITextItemInteraction</span>) -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就解决了上述问题。</p>
+<ul>
+<li>textView中如果同时存在了多个link， voiceover的情况下双击没有反应，这时候系统应该不知道哪个link应该被响应。我们的做法是新建一个textView的子类，重写这个方法：</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="keyword">func</span> <span class="title function_">accessibilityActivate</span>() -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> isMultipleLink <span class="operator">==</span> <span class="literal">true</span> &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.accessibilityActivate()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>isMultipleLink</code>是textView子类的属性，通过给这个变量赋值来判断是否存在多个link， 如果存在就走自己的逻辑处理(例如弹出alert让用户选择link)，如果不存在就走默认的实现。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是项目中碰到的一些坑点，希望有兴趣的童鞋可以补充更多这方面的知识。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://denghuajie.github.io/2023/02/12/%E5%85%B3%E4%BA%8E%E9%A1%B9%E7%9B%AE%E4%B8%ADAccessibility%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/" data-id="cle1h7g6l0001va0v0nove0c6" data-title="关于项目中Accessibility的一些总结" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/02/12/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/02/12/%E5%85%B3%E4%BA%8E%E9%A1%B9%E7%9B%AE%E4%B8%ADAccessibility%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/">关于项目中Accessibility的一些总结</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/12/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Michael Deng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
